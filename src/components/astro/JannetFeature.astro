@@ -9,13 +9,14 @@ import { site } from "../../data/site";
   <div class="container-x">
     <div class="grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
       <FadeIn client:visible className="lg:col-span-5">
-        <p class="eyebrow">Our Aster team</p>
-        <h2 class="h2 mt-5">The people behind your care</h2>
+        <p class="eyebrow">Meet our leadership</p>
+        <h2 class="h2 mt-5">Jeannette Grullon, MHA</h2>
+        <p class="mt-4 text-sm font-bold uppercase tracking-[0.2em] text-terracotta">Chief Operating Officer</p>
         <p class="mt-6 text-xl font-semibold leading-snug text-terracotta-deep">
-          Great care is a team effort, and our team is the heart of Aster.
+          The heart of how Aster runs, every single day.
         </p>
         <p class="mt-4 text-espresso/75">
-          From your first call to the moment you walk out the door, every one of us is here to make your visit easy, warm and personal. We know our patients by name, and we are proud to care for them together.
+          As Chief Operating Officer, Jeannette leads the team behind the scenes and at the front desk. She works to make every visit easy, warm and personal, from your first call to the moment you walk out the door. She also welcomes your feedback, because your voice helps us care better.
         </p>
         <div class="mt-9 flex flex-wrap gap-4">
           <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
@@ -28,7 +29,7 @@ import { site } from "../../data/site";
           <div class="group/img overflow-hidden rounded-[2rem] shadow-lift">
             <img
               src="/images/jannet/Staff.webp"
-              alt="Dr. Fahmy and two members of the Aster team smiling in front of a colorful painting"
+              alt="Dr. Fahmy, Jeannette Grullon and a team member smiling in front of a colorful painting"
               class="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover/img:scale-105"
               style="object-position:50% 30%"
               loading="lazy"
@@ -37,13 +38,16 @@ import { site } from "../../data/site";
           <div class="group/img absolute -bottom-0 -left-2 w-[44%] max-w-[16rem] overflow-hidden rounded-[1.75rem] border-[6px] border-blush bg-white shadow-lift transition-transform duration-500 hover:-translate-y-2 sm:-left-8">
             <img
               src="/images/jannet/Doctor2.webp"
-              alt="A smiling member of the Aster team in a camel blazer"
+              alt="Jeannette Grullon, Chief Operating Officer of Aster OB/GYN"
               class="img-square transition-transform duration-700 group-hover/img:scale-105"
               style="object-position:50% 25%"
               loading="lazy"
             />
           </div>
-          <span class="absolute bottom-3 right-2 hidden rounded-full bg-white/90 px-5 py-2 text-[11.5px] font-bold uppercase tracking-[0.2em] text-terracotta-deep shadow-soft backdrop-blur sm:inline-block">The Aster team</span>
+          <div class="absolute bottom-3 right-2 hidden rounded-2xl bg-white/90 px-5 py-3 text-right shadow-soft backdrop-blur sm:block">
+            <p class="font-display text-lg leading-tight text-espresso">Jeannette Grullon, MHA</p>
+            <p class="mt-1 text-[11px] font-bold uppercase tracking-[0.2em] text-terracotta-deep">Chief Operating Officer</p>
+          </div>
         </div>
       </FadeIn>
     </div>
