@@ -125,6 +125,24 @@ export const testimonials = [
   { name: "Niki S.", quote: "Responsive team — quickly ensures that your insurance is accepted.", about: "Insurance" },
 ];
 
+// Full list for /testimonials/ (the first five also appear on the homepage).
+export const patientReviews = [
+  ...testimonials,
+  { name: "Yami", quote: "From the very first appointment, she spent over an hour and a half with me.", about: "Dr. Roesner patient" },
+  { name: "Genesis", quote: "The OBGYN truly took the time to listen and made me feel heard.", about: "First visit" },
+  { name: "Arlenys", quote: "He answers all my questions and educates me on my concerns.", about: "Dr. Fahmy patient" },
+  { name: "Rachael", quote: "She takes her time to provide the best care and does it in a kind and professional way.", about: "Dr. Roesner patient" },
+  { name: "Dana", quote: "They explained the next steps of my pregnancy care and reviewed my labs in detail.", about: "Pregnancy care" },
+  { name: "Lauren", quote: "Dr. Fahmy's personal follow ups were so appreciated.", about: "Postpartum care" },
+  { name: "Emily", quote: "How rare is it to see a medical office with perfect 5 stars?", about: "The whole practice" },
+  { name: "Christine", quote: "He was easy to talk to and very gentle.", about: "Dr. Fahmy patient" },
+  { name: "Anastasiya", quote: "He is never in a rush and takes time to explain every question or concern that I have.", about: "Long-time patient" },
+  { name: "Josephine P.", quote: "I haven't waited more than 5 minutes to see the doctor.", about: "Pregnancy care" },
+  { name: "Anadel R.", quote: "Best OBGYN I ever had.", about: "Delivered with Dr. Fahmy" },
+  { name: "Alicia G.", quote: "Excellent service and professionalism!", about: "The whole practice" },
+  { name: "A patient", quote: "He is honest, brilliant and truly cares for his patients.", about: "Dr. Fahmy patient" },
+];
+
 export const gallery = [
   { src: "/images/jannet/Staff.webp", alt: "The Aster team together in the lounge", pos: "50% 30%" },
   { src: "/images/jannet/Doctor2.webp", alt: "A smiling member of the Aster team", pos: "50% 25%" },

@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { patientReviews, site } from "../data/site";
+---
+<BaseLayout title="Patient Testimonials | Aster OB/GYN on the Upper West Side">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
+    <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
+    <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
+    <span aria-hidden="true" class="pointer-events-none absolute -top-10 right-[8%] -z-10 font-display text-[22rem] leading-none text-white/[0.05]">“</span>
+    <div class="container-x">
+      <FadeIn client:load className="max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">Testimonials</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">What our patients are saying</h1>
+        <div class="mt-6 flex gap-1 text-gold" aria-label="5 out of 5 stars">
+          {Array.from({ length: 5 }).map(() => <Icon name="star" size={24} fill />)}
+        </div>
+        <p class="mt-6 max-w-2xl text-lg text-white/85 md:text-xl">
+          Kind words from the women and families we are lucky to care for.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-24 top-10 h-[420px] w-[620px] rotate-[-8deg]" />
+    <div class="container-x">
+      <div class="gap-6 md:columns-2 lg:columns-3">
+        {patientReviews.map((r, i) => {
+          const dark = i % 5 === 2;
+          return (
+            <FadeIn client:visible delay={(i % 3) * 0.08} className="mb-6 break-inside-avoid">
+              <figure class={`group rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift ${dark ? "bg-terracotta-deep text-white shadow-soft" : "border border-sand/70 bg-white shadow-soft"}`}>
+                <div class={`flex gap-1 ${dark ? "text-gold-soft" : "text-gold"}`} aria-label="5 out of 5 stars">
+                  {Array.from({ length: 5 }).map(() => <Icon name="star" size={16} fill />)}
+                </div>
+                <blockquote class={`mt-5 font-display text-xl leading-snug ${dark ? "text-white" : "text-espresso"}`}>“{r.quote}”</blockquote>
+                <figcaption class="mt-6 flex items-center gap-3">
+                  <span class={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-display text-lg transition-transform duration-500 group-hover:scale-110 ${dark ? "bg-white/20 text-white" : "bg-terracotta text-white"}`}>{r.name[0]}</span>
+                  <span>
+                    <span class="block font-semibold">{r.name}</span>
+                    <span class={`block text-sm ${dark ? "text-white/70" : "text-taupe"}`}>{r.about}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            </FadeIn>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Ready to meet us?</h2>
+        <p class="mt-5 text-lg text-white/80">Same-day visits, evening and weekend hours.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

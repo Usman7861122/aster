@@ -1,0 +1,54 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+const toc = [
+  { id: "summary", label: "Summary" },
+  { id: "use", label: "How we may use and share your information" },
+  { id: "special", label: "Special protections" },
+  { id: "rights", label: "Your rights" },
+  { id: "duties", label: "Our duties" },
+  { id: "complaints", label: "Questions and complaints" },
+];
+---
+<LegalLayout title="Notice of Privacy Practices" heading="Notice of Privacy Practices" intro="This notice describes how medical information about you may be used and shared, and how you can get access to it. Please review it carefully." toc={toc}>
+  <h2 id="summary">Summary</h2>
+  <p>Aster OB/GYN is required by the federal HIPAA Privacy Rule and New York law to protect the privacy of your health information, to give you this notice, and to follow it. Your health information is yours. We use it and share it only as described below, or with your written permission.</p>
+
+  <h2 id="use">How we may use and share your information</h2>
+  <ul>
+    <li><strong>Treatment.</strong> We share information with doctors, nurses, labs, imaging centers, hospitals and specialists who help care for you.</li>
+    <li><strong>Payment.</strong> We use and share information to bill and collect payment from you or your insurance plan, and to check your benefits.</li>
+    <li><strong>Health care operations.</strong> We use information to run the practice, such as quality review, training, and staff and legal support.</li>
+    <li><strong>Reminders and care options.</strong> We may contact you about appointments, test results, and treatment options or services that may help you.</li>
+    <li><strong>People involved in your care.</strong> With your agreement, we may share information with family members or others you name.</li>
+    <li><strong>As required or allowed by law.</strong> This includes public health reporting, abuse or neglect reports, health oversight, court orders, law enforcement in limited cases, and preventing a serious threat to health or safety.</li>
+  </ul>
+  <p>For any other use, such as marketing or the sale of your information, we need your written permission. You may cancel that permission at any time in writing.</p>
+
+  <h2 id="special">Special protections</h2>
+  <p>Some information has extra protection under federal and New York law, such as HIV-related information, mental health, substance use treatment, reproductive health, and genetic information. We follow those stricter rules and, where required, will ask for your specific written permission before sharing it.</p>
+
+  <h2 id="rights">Your rights</h2>
+  <ul>
+    <li><strong>See or get a copy</strong> of your medical and billing records, on paper or electronically.</li>
+    <li><strong>Ask us to correct</strong> information you believe is wrong or incomplete.</li>
+    <li><strong>Ask for private communication,</strong> such as calls to a different phone number or mail to a different address.</li>
+    <li><strong>Ask us to limit</strong> how we use or share your information. If you pay for a service in full out of pocket, you may ask us not to share it with your health plan.</li>
+    <li><strong>Get a list</strong> of certain times we shared your information.</li>
+    <li><strong>Get a paper copy</strong> of this notice at any time.</li>
+    <li><strong>Choose someone</strong> to act for you, if you have given them medical power of attorney or are their legal guardian.</li>
+  </ul>
+  <p>To use any of these rights, call or visit us. We may ask you to put some requests in writing.</p>
+
+  <h2 id="duties">Our duties</h2>
+  <ul>
+    <li>We keep your health information private and secure.</li>
+    <li>We tell you promptly if a breach puts the privacy of your information at risk.</li>
+    <li>We follow the duties and privacy practices in this notice and give you a copy.</li>
+    <li>We may change this notice. The new notice will apply to all information we hold, and we will post it in our office and on this website.</li>
+  </ul>
+
+  <h2 id="complaints">Questions and complaints</h2>
+  <p>If you think your privacy rights were violated, you may tell us or file a complaint with the U.S. Department of Health and Human Services Office for Civil Rights (<a href="https://www.hhs.gov/hipaa/filing-a-complaint/index.html" target="_blank" rel="noopener">hhs.gov/hipaa/filing-a-complaint</a>). <strong>We will not retaliate against you for filing a complaint.</strong></p>
+  <p>Privacy contact: Aster OB/GYN, {site.address[0]}, {site.address[1]}. Phone: <a href={site.phoneHref}>{site.phone}</a>.</p>
+</LegalLayout>

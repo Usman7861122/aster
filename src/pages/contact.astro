@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import ContactSection from "../components/react/ContactSection";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { site } from "../data/site";
+
+const ways = [
+  { title: "Call us", text: "Speak with our team every day, 9 AM to 8 PM.", label: site.phone, href: site.phoneHref, external: false },
+  { title: "Book online", text: "Pick a time that works for you, any hour of the day.", label: "Book Appointment", href: site.bookingUrl, external: true },
+  { title: "Existing patient", text: "Check results, message us and manage your visits.", label: "Patient Portal", href: site.portalUrl, external: true },
+];
+---
+<BaseLayout title="Contact | Aster OB/GYN on the Upper West Side">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-28">
+    <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
+    <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
+    <div class="container-x grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
+      <FadeIn client:load className="max-w-xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">Contact</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">Contact us</h1>
+        <p class="mt-6 text-lg text-white/85 md:text-xl">
+          We are on the Upper West Side and open every day. Call, book online, or send us a message.
+        </p>
+      </FadeIn>
+      <FadeIn client:load delay={0.15}>
+        <ul class="grid gap-4 rounded-[2rem] border border-white/15 bg-white/10 p-7 text-base backdrop-blur md:p-9">
+          <li class="flex items-start gap-4"><Icon name="map-pin" size={20} class="mt-1 shrink-0 text-gold" /><span>{site.address[0]}<br />{site.address[1]}</span></li>
+          <li class="flex items-center gap-4"><Icon name="phone" size={20} class="shrink-0 text-gold" /><a href={site.phoneHref} class="hover:text-gold-soft">{site.phone}</a></li>
+          <li class="flex items-center gap-4"><Icon name="phone" size={20} class="shrink-0 text-gold" /><span>Fax {site.fax}</span></li>
+          <li class="flex items-center gap-4"><Icon name="clock" size={20} class="shrink-0 text-gold" />{site.hours}</li>
+        </ul>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Ways to reach us -->
+  <section class="section bg-ivory !pb-12 md:!pb-16">
+    <Watermark class="-left-24 top-0 h-[420px] w-[620px] rotate-[-8deg]" />
+    <div class="container-x">
+      <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+        {ways.map((w, i) => (
+          <FadeIn client:visible delay={i * 0.1} className="h-full">
+            <div class="group flex h-full flex-col rounded-[2rem] border border-terracotta/25 bg-white/60 p-8 transition-all duration-500 hover:-translate-y-2 hover:border-terracotta hover:bg-white hover:shadow-lift">
+              <span class="block h-px w-12 bg-gold transition-all duration-500 group-hover:w-24"></span>
+              <h2 class="mt-6 font-display text-2xl text-terracotta-deep">{w.title}</h2>
+              <p class="mt-2 flex-1 text-espresso/75">{w.text}</p>
+              <a href={w.href} target={w.external ? "_blank" : undefined} rel={w.external ? "noopener" : undefined} class="btn btn-dark btn-sm mt-6 self-start">{w.label} <Icon name="arrow-right" size={16} /></a>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Form and map -->
+  <section class="section bg-blush">
+    <div class="container-x">
+      <ContactSection client:visible />
+    </div>
+  </section>
+
+  <!-- Online intake -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Coming in soon?</h2>
+        <p class="mt-5 text-lg text-white/80">Save time at the front desk by filling in your intake forms before your visit.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href="https://patientportal.advancedmd.com/117273/onlineintake" target="_blank" rel="noopener" class="btn btn-light">Online Intake <Icon name="arrow-up-right" size={16} /></a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

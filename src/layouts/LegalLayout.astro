@@ -1,0 +1,86 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  heading: string;
+  intro: string;
+  updated?: string;
+  toc: { id: string; label: string }[];
+}
+const { title, heading, intro, updated = "November 7, 2026", toc } = Astro.props;
+---
+<BaseLayout title={`${title} | Aster OB/GYN`} description={intro}>
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-20 text-white md:pt-52 md:pb-24">
+    <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
+    <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:load className="max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">{title}</span>
+        </nav>
+        <h1 class="mt-8 font-display text-5xl leading-[1.08] md:text-6xl">{heading}</h1>
+        <p class="mt-5 max-w-2xl text-lg text-white/85">{intro}</p>
+        <p class="mt-6 inline-block rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold-soft">Last updated {updated}</p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="section bg-ivory !py-16 md:!py-24">
+    <Watermark class="-left-24 top-10 h-[420px] w-[620px] rotate-[-8deg]" />
+    <div class="container-x grid gap-12 lg:grid-cols-[17rem_minmax(0,52rem)] lg:justify-center lg:gap-14">
+      <aside class="lg:sticky lg:top-32 lg:self-start">
+        <p class="eyebrow">On this page</p>
+        <ol class="mt-5 grid gap-1 text-sm">
+          {toc.map((t, i) => (
+            <li>
+              <a href={`#${t.id}`} class="group flex gap-3 rounded-xl px-3 py-2 text-espresso/75 transition-colors hover:bg-white hover:text-terracotta">
+                <span class="font-display text-terracotta/60 group-hover:text-terracotta">{String(i + 1).padStart(2, "0")}</span>
+                <span>{t.label}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+      <article class="legal-prose rounded-[2rem] border border-sand/70 bg-white p-7 shadow-soft md:p-12">
+        <slot />
+      </article>
+    </div>
+  </section>
+
+  <section class="section bg-blush !py-20">
+    <div class="container-x text-center">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-3xl md:text-4xl">Questions about this page?</h2>
+        <p class="mt-4 text-espresso/75">Call us any day from 9 AM to 8 PM. We are happy to explain.</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a href={site.phoneHref} class="btn btn-dark"><Icon name="phone" size={16} /> {site.phone}</a>
+          <a href="/contact/" class="btn btn-outline">Contact Us <Icon name="arrow-right" size={18} /></a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .legal-prose h2 { font-family: var(--font-display, "Playfair Display", serif); font-size: 1.75rem; line-height: 1.2; margin: 2.75rem 0 1rem; color: #b9622e; scroll-margin-top: 8rem; }
+  .legal-prose h2:first-child { margin-top: 0; }
+  .legal-prose h3 { font-weight: 700; margin: 1.75rem 0 .5rem; }
+  .legal-prose p { margin: 0 0 1rem; line-height: 1.75; opacity: .85; }
+  .legal-prose ul { margin: 0 0 1.25rem; padding-left: 1.25rem; list-style: disc; }
+  .legal-prose li { margin: .4rem 0; line-height: 1.7; opacity: .85; }
+  .legal-prose li::marker { color: #b9622e; }
+  .legal-prose strong { font-weight: 700; }
+  .legal-prose a { color: #b9622e; text-decoration: underline; text-underline-offset: 3px; }
+  .legal-prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: .95rem; }
+  .legal-prose th, .legal-prose td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid rgba(185,98,46,.25); vertical-align: top; }
+  .legal-prose th { font-weight: 700; background: rgba(185,98,46,.06); }
+  .legal-prose .note { border-left: 3px solid #b9622e; background: rgba(185,98,46,.06); padding: 1rem 1.25rem; border-radius: .75rem; margin: 0 0 1.5rem; }
+  @media (max-width: 640px) { .legal-prose table { display: block; overflow-x: auto; } }
+</style>

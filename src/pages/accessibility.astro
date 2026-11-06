@@ -1,0 +1,31 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+const toc = [
+  { id: "commitment", label: "Our commitment" },
+  { id: "features", label: "What we do" },
+  { id: "limits", label: "Known limits" },
+  { id: "help", label: "Ask for help" },
+];
+---
+<LegalLayout title="Accessibility" heading="Accessibility Statement" intro="Aster OB/GYN wants everyone to be able to use this website." toc={toc}>
+  <h2 id="commitment">Our commitment</h2>
+  <p>We want every patient, including people with disabilities, to be able to read and use our website. We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.1, level AA.</p>
+
+  <h2 id="features">What we do</h2>
+  <ul>
+    <li>Pages use clear headings and a logical order, so screen readers can follow them.</li>
+    <li>Images have text descriptions.</li>
+    <li>You can use the whole site with a keyboard.</li>
+    <li>Text is easy to read, with strong contrast, and can be enlarged in your browser.</li>
+    <li>Animations are reduced when your device is set to reduce motion.</li>
+    <li>Buttons and form fields have clear labels.</li>
+  </ul>
+
+  <h2 id="limits">Known limits</h2>
+  <p>Some content comes from other companies, such as online scheduling, the patient portal, online intake and the map. We do not control their design, but we ask them to keep their tools accessible. We keep testing and fixing problems as we find them.</p>
+
+  <h2 id="help">Ask for help</h2>
+  <p>If something on this site is hard to use, or you would like information in another way, please tell us. We will help you book, get information or reach the team another way.</p>
+  <p>Phone: <a href={site.phoneHref}>{site.phone}</a> (every day, 9 AM to 8 PM)<br />Visit: {site.address[0]}, {site.address[1]}</p>
+</LegalLayout>

@@ -1,0 +1,56 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+const toc = [
+  { id: "agreement", label: "Using this website" },
+  { id: "not-advice", label: "Not medical advice" },
+  { id: "emergency", label: "Emergencies" },
+  { id: "no-relationship", label: "No patient relationship" },
+  { id: "use", label: "Acceptable use" },
+  { id: "content", label: "Our content" },
+  { id: "third", label: "Other websites and services" },
+  { id: "liability", label: "Limits of liability" },
+  { id: "law", label: "Governing law" },
+  { id: "changes", label: "Changes" },
+  { id: "contact", label: "Contact us" },
+];
+---
+<LegalLayout title="Terms & Conditions" heading="Terms & Conditions" intro="The rules for using the Aster OB/GYN website, in plain language." toc={toc}>
+  <h2 id="agreement">Using this website</h2>
+  <p>By using this website, you agree to these terms. If you do not agree, please do not use the site.</p>
+
+  <h2 id="not-advice">Not medical advice</h2>
+  <p>The information on this website is for general education. It is not medical advice, and it does not replace a visit with a doctor. Every person is different. Please talk to your own healthcare provider about your health and treatment.</p>
+
+  <h2 id="emergency">Emergencies</h2>
+  <p class="note"><strong>If you think you have a medical emergency, call 911 or go to the nearest emergency room.</strong> Do not use this website or the contact form for urgent needs.</p>
+
+  <h2 id="no-relationship">No patient relationship</h2>
+  <p>Visiting this website, or sending us a message through it, does not create a doctor–patient relationship. That relationship starts only when you are seen as a patient at Aster. Messages sent through the website may not be read right away and are not a safe place for private medical details.</p>
+
+  <h2 id="use">Acceptable use</h2>
+  <p>Please use the website lawfully and respectfully. You agree not to:</p>
+  <ul>
+    <li>try to break, overload or gain unauthorized access to the site or its systems;</li>
+    <li>send harmful code, spam or false information;</li>
+    <li>copy or collect content from the site by automated means without our written permission.</li>
+  </ul>
+
+  <h2 id="content">Our content</h2>
+  <p>The text, photos, logo, design and other content on this site belong to Aster OB/GYN or its licensors and are protected by copyright and trademark law. You may view and print pages for your own personal use. Any other use needs our written permission.</p>
+
+  <h2 id="third">Other websites and services</h2>
+  <p>This site may link to or use services run by others, such as online scheduling, the patient portal, online intake, maps and social media. We do not control them and are not responsible for their content or privacy practices. Their own terms apply.</p>
+
+  <h2 id="liability">Limits of liability</h2>
+  <p>We work hard to keep the website accurate and available, but it is provided "as is," without promises of any kind. To the fullest extent the law allows, Aster OB/GYN is not responsible for losses that come from using the website or relying on its content. Nothing here limits rights you have under the law that cannot be limited.</p>
+
+  <h2 id="law">Governing law</h2>
+  <p>These terms are governed by the laws of the State of New York, and the courts located in New York County, New York will handle any disputes about the website, unless the law says otherwise.</p>
+
+  <h2 id="changes">Changes</h2>
+  <p>We may change these terms. The date at the top shows the latest version. Using the site after a change means you accept the new terms.</p>
+
+  <h2 id="contact">Contact us</h2>
+  <p>Aster OB/GYN<br />{site.address[0]}, {site.address[1]}<br />Phone: <a href={site.phoneHref}>{site.phone}</a></p>
+</LegalLayout>

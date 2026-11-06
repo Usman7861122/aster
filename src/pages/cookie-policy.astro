@@ -1,0 +1,40 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+const toc = [
+  { id: "what", label: "What cookies are" },
+  { id: "types", label: "Cookies we use" },
+  { id: "choose", label: "Your choices" },
+  { id: "third", label: "Third-party content" },
+  { id: "contact", label: "Contact us" },
+];
+---
+<LegalLayout title="Cookie Policy" heading="Cookie Policy" intro="What cookies are, which ones we use, and how you can control them." toc={toc}>
+  <h2 id="what">What cookies are</h2>
+  <p>Cookies are small text files that a website saves in your browser. They help a site work, remember your choices and, if you allow it, understand how the site is used. Similar tools, such as local storage, work in much the same way, and we call them all "cookies" here.</p>
+
+  <h2 id="types">Cookies we use</h2>
+  <table>
+    <thead><tr><th>Type</th><th>What it does</th><th>Needs your OK?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Strictly necessary</strong></td><td>Keeps the site working and remembers your cookie choice (for example, <code>aster_consent</code>, saved for one year).</td><td>No</td></tr>
+      <tr><td><strong>Preferences</strong></td><td>Remembers settings that make the site easier for you.</td><td>Yes</td></tr>
+      <tr><td><strong>Analytics</strong></td><td>Shows us, in combined form, how the site is used so we can improve it.</td><td>Yes</td></tr>
+      <tr><td><strong>Marketing</strong></td><td>May be used to show our practice on other sites and to measure that work.</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+  <p>Optional cookies stay off until you turn them on. If we add a new tool, we will list it here and ask first.</p>
+
+  <h2 id="choose">Your choices</h2>
+  <ul>
+    <li>Use the <strong>Cookie Settings</strong> button in the footer of any page to accept, reject or customize optional cookies. You can change your mind at any time.</li>
+    <li>If your browser sends a Global Privacy Control signal, we keep optional cookies off unless you turn them on.</li>
+    <li>You can also delete or block cookies in your browser settings. If you block all cookies, parts of the site may not work.</li>
+  </ul>
+
+  <h2 id="third">Third-party content</h2>
+  <p>Some parts of the site load content from other companies, such as the Google map on our contact section and our online scheduling, patient portal and intake forms. These providers may set their own cookies. Please read their privacy policies to learn more.</p>
+
+  <h2 id="contact">Contact us</h2>
+  <p>Questions about cookies? Call <a href={site.phoneHref}>{site.phone}</a> or visit us at {site.address[0]}, {site.address[1]}.</p>
+</LegalLayout>
