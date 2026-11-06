@@ -5,6 +5,8 @@ export const site = {
   fax: "(212) 662-6101",
   address: ["240 West 98th Street, Suite 1E", "New York, NY 10025"],
   hours: "Open daily, 9:00 AM – 8:00 PM",
+  instagram: "https://www.instagram.com/asterobgyn/",
+  instagramHandle: "@asterobgyn",
   bookingUrl: "https://consumer.scheduling.athena.io/?locationId=34568-1",
   portalUrl: "https://34568-1.portal.athenahealth.com/",
   tourFormUrl: "https://forms.office.com/r/sDpaV4V4xr",
