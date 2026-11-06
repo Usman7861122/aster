@@ -83,9 +83,11 @@ const values = [
         </dl>
       </FadeIn>
       <FadeIn client:visible delay={0.1} className="lg:col-span-5">
-        <figure class="relative mx-auto max-w-[32rem]">
-          <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-[1.75rem] border border-gold/70"></span>
-          <img src="/images/Doctors.webp" alt="Dr. Rachel Roesner and Dr. Farris Fahmy in the Aster waiting lounge" class="img-square rounded-[1.75rem] shadow-soft" style="object-position: 50% 40%" loading="lazy" />
+        <figure class="group/photo relative mx-auto max-w-[32rem]">
+          <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-[1.75rem] border border-gold/70 transition-all duration-500 ease-out group-hover/photo:translate-x-8 group-hover/photo:translate-y-8 group-hover/photo:border-gold"></span>
+          <div class="overflow-hidden rounded-[1.75rem] shadow-soft transition-all duration-500 ease-out group-hover/photo:-translate-x-1 group-hover/photo:-translate-y-1 group-hover/photo:shadow-lift">
+            <img src="/images/Doctors.webp" alt="Dr. Rachel Roesner and Dr. Farris Fahmy in the Aster waiting lounge" class="img-square transition-transform duration-[900ms] ease-out group-hover/photo:scale-[1.07]" style="object-position: 50% 40%" loading="lazy" />
+          </div>
         </figure>
       </FadeIn>
     </div>
