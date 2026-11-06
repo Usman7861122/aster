@@ -124,6 +124,8 @@ export const testimonials = [
 ];
 
 export const gallery = [
+  { src: "/images/jannet/Staff.webp", alt: "Jannet with Dr. Fahmy and a colleague in the Aster lounge", pos: "50% 30%" },
+  { src: "/images/jannet/Doctor2.webp", alt: "Jannet, a much-loved member of the Aster team", pos: "50% 25%" },
   { src: "/images/clinic/hallway-mother-baby.jpg", alt: "A mother carries her baby down the Aster hallway", pos: "45% 50%" },
   { src: "/images/clinic/lounge.jpg", alt: "The Aster waiting lounge with art on the wall", pos: "35% 50%" },
   { src: "/images/clinic/ultrasound-consult.jpg", alt: "Dr. Fahmy talking with a patient beside the ultrasound", pos: "45% 50%" },

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 
 export interface CardItem {
@@ -75,6 +76,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   const hasEntered = useRef(false);
   const directionRef = useRef<"left" | "right" | null>(null);
   const prevVisible = useRef<Set<number>>(new Set());
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const totalCards = cards.length;
   const needsPagination = totalCards > MAX_VISIBLE;
@@ -249,6 +253,29 @@ export default function SocialCards({ cards }: SocialCardsProps) {
     };
   }, [centerIndex, totalCards, getVisibleMap, needsPagination]);
 
+  // Lightbox: keyboard controls and page scroll lock while it is open.
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox((i) => (i === null ? i : (i + 1) % totalCards));
+      if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? i : (i - 1 + totalCards) % totalCards));
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [lightbox, totalCards]);
+
+  const openCard = (index: number, el: HTMLElement) => {
+    // Cards that are faded out (not in the visible fan) cannot be opened.
+    if (parseFloat(getComputedStyle(el).opacity) < 0.5) return;
+    setLightbox(index);
+  };
+
   if (!totalCards) return null;
 
   const chevron = (direction: "left" | "right") => (
@@ -270,7 +297,15 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             return card.linkUrl ? (
               <a key={index} href={card.linkUrl} target={card.linkUrl.startsWith("http") ? "_blank" : "_self"} rel="noopener noreferrer" className="fan-card block cursor-pointer">{image}</a>
             ) : (
-              <div key={index} className="fan-card">{image}</div>
+              <div
+                key={index}
+                className="fan-card cursor-zoom-in"
+                role="button"
+                tabIndex={0}
+                aria-label={`Open photo: ${card.alt || index + 1}`}
+                onClick={(e) => openCard(index, e.currentTarget)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openCard(index, e.currentTarget); } }}
+              >{image}</div>
             );
           })}
         </div>
@@ -290,6 +325,37 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             {chevron("right")}
           </button>
         </div>
+      )}
+
+      {mounted && lightbox !== null && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#1f1612]/92 p-4 backdrop-blur-sm md:p-10"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo viewer"
+          onClick={() => setLightbox(null)}
+        >
+          <img
+            key={lightbox}
+            src={cards[lightbox].imgUrl}
+            alt={cards[lightbox].alt || ""}
+            className="max-h-[82vh] max-w-full rounded-[1.5rem] object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          {cards[lightbox].alt && (
+            <p className="pointer-events-none absolute inset-x-0 bottom-5 px-16 text-center text-sm text-white/80 md:bottom-8">{cards[lightbox].alt}</p>
+          )}
+          <button className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 md:right-8 md:top-8" onClick={(e) => { e.stopPropagation(); setLightbox(null); }} aria-label="Close">
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+          {totalCards > 1 && (
+            <>
+              <button className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 md:left-8" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + totalCards) % totalCards); }} aria-label="Previous photo">{chevron("left")}</button>
+              <button className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 md:right-8" onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % totalCards); }} aria-label="Next photo">{chevron("right")}</button>
+            </>
+          )}
+        </div>,
+        document.body
       )}
     </section>
   );

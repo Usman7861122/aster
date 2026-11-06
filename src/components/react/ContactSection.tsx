@@ -37,28 +37,17 @@ export default function ContactSection() {
   }
 
   return (
-    <div className="relative">
-      {/* Map fills the section background */}
-      <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-lift">
-        <iframe
-          title="Map to Aster OB/GYN, 240 West 98th Street, New York"
-          src={site.mapEmbed}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="h-full w-full border-0 [filter:sepia(0.28)_saturate(0.9)_contrast(1.02)]"
-        />
-      </div>
-
-      <div className="relative grid min-h-[44rem] items-center p-4 md:p-10 lg:min-h-[46rem] lg:grid-cols-[minmax(0,32rem)_1fr]">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="rounded-3xl bg-ivory/95 p-6 shadow-lift backdrop-blur-md md:p-9"
-        >
-          <p className="eyebrow">Get in touch</p>
-          <h2 className="mt-3 font-display text-3xl md:text-4xl">Tell us how we can help</h2>
+    <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+      {/* Form */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7 }}
+        className="rounded-[2rem] border border-sand/70 bg-white p-6 shadow-soft md:p-10"
+      >
+        <p className="eyebrow">Get in touch</p>
+        <h2 className="mt-3 font-display text-3xl md:text-4xl">Tell us how we can help</h2>
 
           <AnimatePresence mode="wait">
             {status === "sent" ? (
@@ -100,32 +89,45 @@ export default function ContactSection() {
               </motion.form>
             )}
           </AnimatePresence>
-        </motion.div>
+      </motion.div>
 
-        {/* Info chip on the map */}
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-6 self-end justify-self-start rounded-3xl bg-espresso/95 p-6 text-white shadow-lift backdrop-blur-md transition-transform duration-500 hover:-translate-y-1 lg:mt-0 lg:justify-self-end"
-        >
-          <p className="font-display text-xl text-gold-soft">Aster OB/GYN</p>
-          <ul className="mt-3 grid gap-2 text-base text-white/90">
-            <li className="flex items-start gap-3"><Icon name="map-pin" size={18} className="mt-1 shrink-0 text-gold" />{site.address[0]}<br />{site.address[1]}</li>
-            <li className="flex items-center gap-3"><Icon name="phone" size={18} className="shrink-0 text-gold" />{site.phone}</li>
-            <li className="flex items-center gap-3"><Icon name="clock" size={18} className="shrink-0 text-gold" />{site.hours}</li>
-          </ul>
+      {/* Map and details */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, delay: 0.15 }}
+        className="flex flex-col gap-4"
+      >
+        <div className="min-h-[22rem] flex-1 overflow-hidden rounded-[2rem] shadow-lift">
+          <iframe
+            title="Map to Aster OB/GYN, 240 West 98th Street, New York"
+            src={site.mapEmbed}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-full min-h-[22rem] w-full border-0 [filter:sepia(0.28)_saturate(0.9)_contrast(1.02)]"
+          />
+        </div>
+
+        <div className="flex flex-col gap-5 rounded-[2rem] bg-espresso p-6 text-white shadow-lift transition-transform duration-500 hover:-translate-y-1 sm:flex-row sm:items-end sm:justify-between md:p-8">
+          <div>
+            <p className="font-display text-xl text-gold-soft">Aster OB/GYN</p>
+            <ul className="mt-3 grid gap-2 text-base text-white/90">
+              <li className="flex items-start gap-3"><Icon name="map-pin" size={18} className="mt-1 shrink-0 text-gold" /><span>{site.address[0]}<br />{site.address[1]}</span></li>
+              <li className="flex items-center gap-3"><Icon name="phone" size={18} className="shrink-0 text-gold" />{site.phone}</li>
+              <li className="flex items-center gap-3"><Icon name="clock" size={18} className="shrink-0 text-gold" />{site.hours}</li>
+            </ul>
+          </div>
           <a
             href="https://www.google.com/maps/dir/?api=1&destination=240+W+98th+St+Suite+1E+New+York+NY+10025"
             target="_blank"
             rel="noopener"
-            className="btn btn-gold btn-sm mt-5"
+            className="btn btn-gold btn-glow shrink-0"
           >
             Get Directions <Icon name="arrow-up-right" size={16} />
           </a>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,0 +1,51 @@
+---
+import FadeIn from "../react/FadeIn";
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { site } from "../../data/site";
+---
+<section id="jannet" class="section bg-blush">
+  <Watermark class="-left-24 top-10 h-[480px] w-[700px] rotate-[-8deg]" />
+  <div class="container-x">
+    <div class="grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
+      <FadeIn client:visible className="lg:col-span-5">
+        <p class="eyebrow">Part of our Aster family</p>
+        <h2 class="h2 mt-5">Meet Jannet</h2>
+        <p class="mt-6 text-lg text-espresso/85">
+          Jannet is not one of our doctors, but she is one of the most important people at Aster.
+        </p>
+        <p class="mt-4 text-espresso/75">
+          She helps make every visit feel easy and welcoming, from your first call to the moment you walk out the door. Many of our patients know her by name, and so do we. We could not do it without her.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href="/about-practice/" class="btn btn-outline">About Our Practice</a>
+        </div>
+      </FadeIn>
+
+      <FadeIn client:visible delay={0.15} className="lg:col-span-7">
+        <div class="relative pb-16 sm:pb-20">
+          <div class="group/img overflow-hidden rounded-[2rem] shadow-lift">
+            <img
+              src="/images/jannet/Staff.webp"
+              alt="Jannet standing with Dr. Fahmy and a colleague, all smiling, in front of a colorful painting"
+              class="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover/img:scale-105"
+              style="object-position:50% 30%"
+              loading="lazy"
+            />
+          </div>
+          <div class="group/img absolute -bottom-0 -left-2 w-[44%] max-w-[16rem] overflow-hidden rounded-[1.75rem] border-[6px] border-blush bg-white shadow-lift transition-transform duration-500 hover:-translate-y-2 sm:-left-8">
+            <img
+              src="/images/jannet/Doctor2.webp"
+              alt="Portrait of Jannet smiling in a camel blazer"
+              class="img-square transition-transform duration-700 group-hover/img:scale-105"
+              style="object-position:50% 25%"
+              loading="lazy"
+            />
+          </div>
+          <span class="absolute bottom-3 right-2 hidden rounded-full bg-white/90 px-5 py-2 text-[11.5px] font-bold uppercase tracking-[0.2em] text-terracotta-deep shadow-soft backdrop-blur sm:inline-block">Jannet · Aster team</span>
+        </div>
+      </FadeIn>
+    </div>
+  </div>
+</section>
