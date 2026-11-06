@@ -4,7 +4,7 @@ import FadeIn from "../../components/react/FadeIn";
 import Icon from "../../components/astro/Icon.astro";
 import Watermark from "../../components/astro/Watermark.astro";
 import NearbyAreas from "../../components/astro/NearbyAreas.astro";
-import { site, services } from "../../data/site";
+import { site, services, serviceMenu } from "../../data/site";
 import { servicePages } from "../../data/service-pages";
 
 export function getStaticPaths() {
@@ -12,7 +12,16 @@ export function getStaticPaths() {
 }
 
 const { page: p } = Astro.props;
-const related = p.related.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
+const builtPages = new Map(servicePages.map((x) => [x.slug, x]));
+const menuItems = serviceMenu.flatMap((g) => g.items);
+const related = p.related
+  .map((s) => {
+    const built = builtPages.get(s);
+    const menu = menuItems.find((x) => x.slug === s);
+    if (built && menu) return { slug: s, title: menu.title, img: `/images/${s}-a.jpg`, pos: "50% 50%", text: built.lede };
+    return services.find((x) => x.slug === s);
+  })
+  .filter(Boolean);
 const pad = (n: number) => String(n).padStart(2, "0");
 ---
 <BaseLayout title={p.metaTitle}>
