@@ -1,0 +1,30 @@
+---
+// Full-screen photo with a fixed-window parallax: the photo stays still while the page scrolls over it.
+// The fixed image is clipped to this section, so it works on desktop and on iOS (no background-attachment).
+import Icon from "./Icon.astro";
+import { site } from "../../data/site";
+---
+
+<section
+  id="family-care"
+  aria-label="Family care"
+  class="relative isolate h-[100svh] min-h-[540px] w-full"
+  style="clip-path: inset(0);"
+>
+  <img
+    src="/images/family-parallax.webp"
+    alt="A smiling baby sits on the exam table between his mother and Dr. Fahmy, who are both laughing"
+    class="fixed inset-0 -z-10 h-[100lvh] w-full object-cover object-[50%_40%]"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-espresso/75 via-espresso/10 to-transparent"></div>
+
+  <div class="container-x relative flex h-full flex-col items-center justify-end pb-16 text-center text-white md:pb-24">
+    <p class="eyebrow eyebrow-center !text-gold-soft">Family care</p>
+    <h2 class="mt-4 font-display text-4xl leading-tight drop-shadow-sm md:text-6xl">Care for the whole family.</h2>
+    <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-light btn-sm mt-8">
+      Book Appointment <Icon name="arrow-right" size={16} />
+    </a>
+  </div>
+</section>
