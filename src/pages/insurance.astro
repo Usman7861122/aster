@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { site } from "../data/site";
+
+const pillars = [
+  { n: "01", title: "Unmatched choice", text: "We are an independent practice. Your care plan is built around you, not around what an insurance company allows. You pick your specialists, get the treatments you need, and build a long-term relationship with your doctors." },
+  { n: "02", title: "Your advocate", text: "We handle the insurance paperwork for you. Our team files claims directly with your carrier and looks for the most affordable options, so you can focus on your health." },
+  { n: "03", title: "Maximizing your benefits", text: "If you have out-of-network benefits, we work to keep your out-of-pocket costs low and to get the most value from your plan." },
+];
+
+const steps = [
+  { title: "Call or book", text: "Tell us your plan when you reach out. We are here every day, 9 AM to 8 PM." },
+  { title: "We check your benefits", text: "Our team looks at what your plan covers so there are no surprises." },
+  { title: "Come in for your visit", text: "Focus on your care. We take care of the paperwork." },
+  { title: "We file your claim", text: "We send the claim straight to your carrier and help with any questions." },
+];
+---
+<BaseLayout title="Insurance | Aster OB/GYN on the Upper West Side">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
+    <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
+    <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
+    <div class="container-x grid items-center gap-14 md:grid-cols-[1.1fr_1fr]">
+      <FadeIn client:load className="max-w-xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">Insurance</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">Insurance</h1>
+        <p class="mt-6 text-lg text-white/85 md:text-xl">
+          Personalized care, without insurance barriers. We work with you to understand and use your benefits.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+      <FadeIn client:load delay={0.15} className="relative mx-auto w-full max-w-md">
+        <div class="group/img overflow-hidden rounded-[2rem] border-4 border-white/90 shadow-2xl">
+          <img src="/images/family-planning-a.jpg" alt="A doctor talks with a patient about her care plan" class="img-square transition-transform duration-700 group-hover/img:scale-105" />
+        </div>
+        <span class="absolute -bottom-5 left-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-terracotta-deep shadow-lift">
+          <Icon name="shield-check" size={16} /> Out-of-network benefits welcome
+        </span>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-24 top-10 h-[420px] w-[620px] rotate-[-8deg]" />
+    <div class="container-x grid items-center gap-14 lg:grid-cols-2">
+      <FadeIn client:visible>
+        <p class="eyebrow">Your health, your choice</p>
+        <h2 class="h2 mt-5">Care that does not depend on your insurance</h2>
+        <p class="mt-6 text-lg text-espresso/75">
+          Aster is an independent practice. We accept insurance benefits on an out-of-network basis, and we also care for patients who are uninsured or who have no out-of-network coverage.
+        </p>
+        <p class="mt-4 text-espresso/75">
+          Not sure what your plan covers? Call us. We are happy to look at it together before your visit.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href={site.phoneHref} class="btn btn-dark"><Icon name="phone" size={16} /> {site.phone}</a>
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-outline">Book Appointment</a>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.12}>
+        <div class="group/img mx-auto max-w-lg overflow-hidden rounded-[2rem] shadow-lift">
+          <img src="/images/gynecology-a.jpg" alt="A calm, welcoming consultation at Aster OB/GYN" class="img-square transition-transform duration-700 group-hover/img:scale-105" loading="lazy" />
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Three promises -->
+  <section class="section bg-blush">
+    <Watermark class="-right-24 bottom-0 h-[460px] w-[680px] rotate-[8deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">What you can expect</p>
+        <h2 class="h2 mt-5">People-centered healthcare</h2>
+      </FadeIn>
+      <div class="mx-auto mt-16 max-w-4xl divide-y divide-terracotta/25 border-y border-terracotta/25">
+        {pillars.map((p, i) => (
+          <FadeIn client:visible delay={i * 0.08}>
+            <div class="group grid gap-4 py-10 transition-colors duration-500 hover:bg-white/40 md:grid-cols-[7rem_1fr_1.6fr] md:items-baseline md:gap-8 md:px-6">
+              <span class="font-display text-5xl text-terracotta/40 transition-colors duration-500 group-hover:text-terracotta">{p.n}</span>
+              <h3 class="font-display text-2xl md:text-3xl">{p.title}</h3>
+              <p class="text-espresso/75">{p.text}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section bg-white">
+    <Watermark class="-left-20 bottom-0 h-[420px] w-[620px] rotate-[-6deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">How it works</p>
+        <h2 class="h2 mt-5">Simple from start to finish</h2>
+      </FadeIn>
+      <div class="relative mx-auto mt-16 grid max-w-6xl gap-10 md:grid-cols-4">
+        <span aria-hidden="true" class="absolute left-[12%] right-[12%] top-7 hidden h-px bg-gradient-to-r from-transparent via-terracotta/40 to-transparent md:block"></span>
+        {steps.map((s, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <div class="group relative text-center">
+              <span class="relative mx-auto grid h-14 w-14 place-items-center rounded-full bg-terracotta font-display text-xl text-white shadow-soft transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-lift">{i + 1}</span>
+              <h3 class="mt-6 font-display text-xl">{s.title}</h3>
+              <p class="mt-2 text-sm text-espresso/70">{s.text}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- No Surprises Act notice -->
+  <section class="section bg-ivory">
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-4xl">
+        <div class="rounded-[2rem] border border-terracotta/30 bg-white p-8 shadow-soft transition-shadow duration-500 hover:shadow-lift md:p-12">
+          <p class="eyebrow">Your rights</p>
+          <h2 class="h2 mt-4">No Surprise Billing Notice</h2>
+          <p class="mt-5 text-espresso/75">
+            Aster OB/GYN is fully committed to helping you access and understand all of your benefits. You have protections against surprise medical bills under federal law (the No Surprises Act) and New York State law.
+          </p>
+          <p class="mt-4 text-espresso/75">
+            To learn more about your rights, visit the websites below, or call us and we will explain.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="https://www.cms.gov/nosurprises" target="_blank" rel="noopener" class="btn btn-outline btn-sm">CMS: No Surprises <Icon name="arrow-up-right" size={16} /></a>
+            <a href="https://www.dfs.ny.gov/consumers/health_insurance/surprise_medical_bills" target="_blank" rel="noopener" class="btn btn-outline btn-sm">NY Dept. of Financial Services <Icon name="arrow-up-right" size={16} /></a>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Questions about your coverage?</h2>
+        <p class="mt-5 text-lg text-white/80">Call us. We are happy to help, every day from 9 AM to 8 PM.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>
