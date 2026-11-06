@@ -8,6 +8,7 @@ import { site } from "../data/site";
 import { oldSite } from "../lib/media";
 import list from "../data/old-site-images.json";
 
+const collage = list.ourBabies.slice(0, 3).map((rel) => oldSite(rel));
 const pos = ["50% 40%", "50% 35%", "50% 45%", "50% 30%"];
 const images = list.ourBabies.map((rel, i) => ({
   src: oldSite(rel),
@@ -17,11 +18,11 @@ const images = list.ourBabies.map((rel, i) => ({
 ---
 <BaseLayout title="Our Babies | Aster OB/GYN on the Upper West Side">
   <!-- Title band -->
-  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-28">
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-36">
     <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
     <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
-    <div class="container-x">
-      <FadeIn client:load className="max-w-3xl">
+    <div class="container-x grid items-center gap-14 md:grid-cols-[1.05fr_1fr]">
+      <FadeIn client:load className="max-w-xl">
         <nav aria-label="Breadcrumb" class="text-sm text-white/70">
           <a href="/" class="hover:text-gold-soft">Home</a>
           <span class="mx-2">/</span>
@@ -29,9 +30,20 @@ const images = list.ourBabies.map((rel, i) => ({
         </nav>
         <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
         <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">Our babies</h1>
-        <p class="mt-6 max-w-2xl text-lg text-white/85 md:text-xl">
+        <p class="mt-6 text-lg text-white/85 md:text-xl">
           We are honored to be part of life's most meaningful moments.
         </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+
+      <!-- Baby collage -->
+      <FadeIn client:load delay={0.15} className="relative mx-auto h-[360px] w-full max-w-[520px] md:h-[480px]">
+        <img src={collage[0]} alt="A newborn baby welcomed by the Aster family" class="absolute left-0 top-6 aspect-square w-[52%] -rotate-6 rounded-3xl border-4 border-white/90 object-cover shadow-2xl transition-all duration-500 hover:z-30 hover:-rotate-2 hover:scale-105" />
+        <img src={collage[1]} alt="A smiling baby from the Aster family" class="absolute right-0 top-0 z-10 aspect-square w-[48%] rotate-6 rounded-3xl border-4 border-white/90 object-cover shadow-2xl transition-all duration-500 hover:z-30 hover:rotate-2 hover:scale-105" />
+        <img src={collage[2]} alt="A sleeping baby from the Aster family" class="absolute bottom-0 left-[24%] z-20 aspect-square w-[54%] rotate-2 rounded-3xl border-4 border-white/90 object-cover shadow-2xl transition-all duration-500 hover:z-30 hover:rotate-0 hover:scale-105" />
       </FadeIn>
     </div>
   </section>
