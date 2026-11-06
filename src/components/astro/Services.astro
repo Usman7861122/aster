@@ -1,0 +1,50 @@
+---
+import FadeIn from "../react/FadeIn";
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { services } from "../../data/site";
+---
+<section id="services" class="section bg-blush">
+  <Watermark class="-left-32 -top-10 h-[480px] w-[700px] rotate-[10deg]" />
+  <div class="container-x">
+    <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+      <p class="eyebrow eyebrow-center">Our services</p>
+      <h2 class="h2 mt-5">Care for every stage of your life</h2>
+      <p class="mt-5 text-espresso/75">Hover over a card to see what each service includes.</p>
+    </FadeIn>
+
+    <div class="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {services.slice(0, 6).map((s, i) => (
+        <FadeIn client:visible delay={(i % 3) * 0.08}>
+          <article tabindex="0" class="group aspect-square [perspective:1400px] focus:outline-none">
+            <div class="relative h-full w-full rounded-3xl shadow-soft transition-all duration-[800ms] ease-[cubic-bezier(.22,1,.36,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus:[transform:rotateY(180deg)] group-focus-visible:ring-2 group-focus-visible:ring-terracotta">
+              {/* Front */}
+              <div class="absolute inset-0 overflow-hidden rounded-3xl [backface-visibility:hidden]">
+                <img src={s.img} alt={s.title} class="h-full w-full object-cover" style={`object-position:${s.pos}`} loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/10 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-6">
+                  <h3 class="font-display text-2xl leading-tight text-white">{s.title}</h3>
+                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/20 text-white backdrop-blur"><Icon name="sparkle" size={18} /></span>
+                </div>
+              </div>
+              {/* Back: same image with overlay */}
+              <div class="absolute inset-0 overflow-hidden rounded-3xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                <img src={s.img} alt="" aria-hidden="true" class="h-full w-full scale-110 object-cover blur-[2px]" style={`object-position:${s.pos}`} loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-br from-clay/90 via-espresso/85 to-terracotta-deep/85"></div>
+                <div class="absolute inset-0 flex flex-col justify-center gap-4 p-7 text-white">
+                  <h3 class="font-display text-2xl text-gold-soft">{s.title}</h3>
+                  <p class="text-base leading-relaxed text-white/90">{s.text}</p>
+                  <a href={`/services/${s.slug}/`} class="btn btn-gold btn-sm mt-1 w-fit">Learn More <Icon name="arrow-right" size={16} /></a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </FadeIn>
+      ))}
+    </div>
+
+    <FadeIn client:visible className="mt-14 text-center">
+      <a href="/services/" class="btn btn-dark">View All Services <Icon name="arrow-right" size={18} /></a>
+    </FadeIn>
+  </div>
+</section>

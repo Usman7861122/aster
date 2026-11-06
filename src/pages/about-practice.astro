@@ -1,0 +1,178 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import Providers from "../components/astro/Providers.astro";
+import Achievements from "../components/astro/Achievements.astro";
+import { site } from "../data/site";
+
+const approach = [
+  { icon: "check", title: "Annual exams & screenings", text: "Routine check-ups and preventive screenings that keep small things small." },
+  { icon: "shield-check", title: "Family planning", text: "Honest, unhurried advice on contraception and planning your family." },
+  { icon: "heart", title: "Pregnancy & delivery", text: "Care from your first visit to delivery, with the same familiar faces." },
+  { icon: "sparkle", title: "Menopause care", text: "Clear support for the changes that come with menopause and beyond." },
+  { icon: "users", title: "Gynecologic conditions", text: "Careful diagnosis and treatment, explained in plain words." },
+];
+
+const values = [
+  { icon: "heart", title: "Patient-centered", text: "You are heard first. Your goals shape every plan we make." },
+  { icon: "award", title: "Education & empowerment", text: "We explain your options so you can decide with confidence." },
+  { icon: "users", title: "Supportive & inclusive", text: "Every woman is welcome here, at every age and stage of life." },
+];
+---
+<BaseLayout title="About Aster OB/GYN | Women's Health Center on the Upper West Side">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
+    <img src="/images/Doctor2-2.webp" alt="A doctor listens to a smiling patient's heartbeat in an Aster exam room" class="absolute bottom-0 right-0 -z-20 h-[calc(100%-9rem)] w-full object-cover md:h-[calc(100%-9.25rem)] md:w-[72%]" style="object-position: 50% 0%" />
+    <span class="absolute inset-0 -z-10 bg-espresso/65 md:hidden"></span>
+    <span class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso from-[28%] via-espresso/70 via-[48%] to-espresso/10 md:block"></span>
+    <span class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-espresso/60 to-transparent"></span>
+    <Watermark class="-left-24 -bottom-16 h-[460px] w-[680px] rotate-[-8deg] !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:load className="max-w-2xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">About Practice</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">About our practice</h1>
+        <p class="mt-6 max-w-xl text-lg text-white/85 md:text-xl">
+          A women's health center on the Upper West Side, caring for you from adolescence through menopause and beyond.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Who we are -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-28 top-4 h-[520px] w-[760px] rotate-[8deg]" />
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-7">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="h2 mt-5 max-w-xl">Care that makes you feel heard, respected and informed</h2>
+        <p class="mt-8 max-w-2xl text-xl leading-[1.75] text-espresso/90">
+          Aster OB/GYN gives personal care to women at every stage of life. Our board-certified
+          physicians and nurse practitioners take the time to listen.
+        </p>
+        <p class="mt-5 max-w-2xl text-espresso/75">
+          We bring together modern medical knowledge and a warm, whole-person approach. Because we are
+          an independent practice, you see familiar faces, and your questions always get time.
+        </p>
+        <dl class="mt-10 grid max-w-2xl divide-y divide-sand sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <div class="group py-5 sm:px-6 sm:py-1 sm:first:pl-0">
+            <dt class="text-[11.5px] font-bold uppercase tracking-[0.22em] text-terracotta">Hours</dt>
+            <dd class="mt-2 font-display text-xl transition-colors duration-300 group-hover:text-terracotta">Every day</dd>
+            <dd class="mt-0.5 text-[15px] text-taupe">9:00 AM – 8:00 PM</dd>
+          </div>
+          <div class="group py-5 sm:px-6 sm:py-1">
+            <dt class="text-[11.5px] font-bold uppercase tracking-[0.22em] text-terracotta">Find us</dt>
+            <dd class="mt-2 font-display text-xl transition-colors duration-300 group-hover:text-terracotta">240 W 98th Street</dd>
+            <dd class="mt-0.5 text-[15px] text-taupe">Suite 1E, New York</dd>
+          </div>
+          <div class="group py-5 sm:px-6 sm:py-1">
+            <dt class="text-[11.5px] font-bold uppercase tracking-[0.22em] text-terracotta">Hospital</dt>
+            <dd class="mt-2 font-display text-xl transition-colors duration-300 group-hover:text-terracotta">Mount Sinai West</dd>
+            <dd class="mt-0.5 text-[15px] text-taupe">Affiliated physicians</dd>
+          </div>
+        </dl>
+      </FadeIn>
+      <FadeIn client:visible delay={0.1} className="lg:col-span-5">
+        <figure class="relative mx-auto max-w-[32rem]">
+          <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-[1.75rem] border border-gold/70"></span>
+          <img src="/images/Doctors.webp" alt="Dr. Rachel Roesner and Dr. Farris Fahmy in the Aster waiting lounge" class="img-square rounded-[1.75rem] shadow-soft" style="object-position: 50% 40%" loading="lazy" />
+        </figure>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Approach & services: editorial numbered list -->
+  <section class="section bg-clay text-white">
+    <Watermark class="-right-24 top-0 h-[480px] w-[700px] rotate-[6deg] !opacity-[0.07]" />
+    <div class="container-x grid gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-5">
+        <div>
+          <p class="eyebrow !text-gold-soft">Our approach</p>
+          <h2 class="h2 mt-5 !text-white">Modern medicine, a warm approach</h2>
+          <p class="mt-6 max-w-md text-white/75">
+            Everything we offer is built around listening first, then explaining clearly.
+          </p>
+          <figure class="relative mt-10 max-w-[24rem]">
+            <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-[1.75rem] border border-gold/50"></span>
+            <img src="/images/clinic/ultrasound-consult.jpg" alt="Dr. Fahmy talking with a patient beside the ultrasound" class="img-square rounded-[1.75rem] shadow-lift" style="object-position: 8% 50%" loading="lazy" />
+          </figure>
+          <a href="/services/" class="btn btn-gold mt-12">View All Services <Icon name="arrow-right" size={18} /></a>
+        </div>
+      </FadeIn>
+
+      <div class="relative lg:col-span-7">
+        <div role="list" tabindex="0" aria-label="Our care approach" class="approach-scroll max-h-[34rem] overflow-y-auto pr-3 outline-none lg:absolute lg:inset-0 lg:max-h-none">
+        {approach.map((a, i) => (
+          <FadeIn client:visible delay={i * 0.06}>
+            <div role="listitem" class:list={["group relative isolate cursor-default overflow-hidden border-t border-white/15", i === approach.length - 1 && "border-b"]}>
+              <span aria-hidden="true" class="absolute inset-y-0 left-0 -z-10 w-0 bg-gradient-to-r from-terracotta/30 to-transparent transition-all duration-700 group-hover:w-full"></span>
+              <div class="flex items-start gap-6 pl-2 pr-6 py-8 transition-transform duration-500 group-hover:translate-x-3 md:gap-10 md:py-10">
+                <span class="font-display text-4xl italic text-gold transition-colors duration-500 group-hover:text-gold-soft md:text-5xl">{String(i + 1).padStart(2, "0")}</span>
+                <div class="min-w-0 flex-1">
+                  <h3 class="font-display text-2xl leading-tight md:text-[2rem]">{a.title}</h3>
+                  <p class="mt-3 max-w-lg text-white/70">{a.text}</p>
+                </div>
+                <span class="mt-2 hidden h-10 w-10 shrink-0 place-items-center rounded-full border border-white/25 text-white/60 opacity-0 transition-all duration-500 group-hover:-rotate-45 group-hover:border-gold group-hover:text-gold group-hover:opacity-100 md:grid"><Icon name="arrow-right" size={18} /></span>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission: one big statement, three quiet columns -->
+  <section class="section bg-blush">
+    <Watermark class="-right-20 bottom-0 h-[500px] w-[740px] rotate-[-6deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="relative mx-auto max-w-4xl text-center">
+        <span aria-hidden="true" class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 font-display text-[11rem] leading-none text-terracotta/15">“</span>
+        <p class="eyebrow eyebrow-center relative">Our mission</p>
+        <p class="relative mt-8 font-display text-3xl leading-[1.3] text-espresso md:text-5xl">
+          Strong, lasting relationships with our patients, through
+          <em class="text-terracotta not-italic">high-quality care</em> in a supportive, inclusive place.
+        </p>
+      </FadeIn>
+      <div class="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-3">
+        {values.map((v, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <div class="group h-full rounded-3xl border border-terracotta/30 bg-white/30 p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-terracotta hover:bg-white/60 hover:shadow-soft md:p-9">
+              <span class="block h-px w-10 bg-gold transition-all duration-500 group-hover:w-20"></span>
+              <h3 class="mt-6 font-display text-2xl transition-colors duration-300 group-hover:text-terracotta">{v.title}</h3>
+              <p class="mt-3 text-espresso/75">{v.text}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Providers bg="bg-ivory" />
+  <Achievements bg="bg-white" />
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Your health. Your journey. Our priority.</h2>
+        <p class="mt-5 text-lg text-white/80">Care that fits every stage of women's health. We would love to meet you.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

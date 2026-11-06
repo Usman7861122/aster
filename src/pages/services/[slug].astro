@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FadeIn from "../../components/react/FadeIn";
+import Icon from "../../components/astro/Icon.astro";
+import Watermark from "../../components/astro/Watermark.astro";
+import NearbyAreas from "../../components/astro/NearbyAreas.astro";
+import { site, services } from "../../data/site";
+import { servicePages } from "../../data/service-pages";
+
+export function getStaticPaths() {
+  return servicePages.map((p) => ({ params: { slug: p.slug }, props: { page: p } }));
+}
+
+const { page: p } = Astro.props;
+const related = p.related.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+<BaseLayout title={p.metaTitle}>
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
+    <img src={`/images/${p.slug}-hero.jpg`} alt={p.heroAlt} class="absolute bottom-0 right-0 -z-20 h-[calc(100%-9rem)] w-full object-cover md:h-[calc(100%-9.25rem)] md:w-[72%]" style={`object-position: ${p.heroPos ?? "50% 20%"}`} />
+    <span class="absolute inset-0 -z-10 bg-espresso/65 md:hidden"></span>
+    <span class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso from-[28%] via-espresso/70 via-[48%] to-espresso/10 md:block"></span>
+    <span class="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-espresso/85 to-transparent"></span>
+    <Watermark class="-left-24 -bottom-16 h-[460px] w-[680px] rotate-[-8deg] !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:load className="max-w-2xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/services/" class="hover:text-gold-soft">Services</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">{p.title.replace(" in Manhattan", "")}</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">{p.eyebrow}</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">{p.title}</h1>
+        <p class="mt-6 max-w-xl text-lg text-white/85 md:text-xl">{p.lede}</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+      <NearbyAreas />
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-28 top-4 h-[520px] w-[760px] rotate-[8deg]" />
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-7">
+        <p class="eyebrow">{p.intro.eyebrow}</p>
+        <h2 class="h2 mt-5 max-w-xl">{p.intro.title}</h2>
+        <p class="mt-8 max-w-2xl text-xl leading-[1.75] text-espresso/90">{p.intro.lead}</p>
+        <p class="mt-5 max-w-2xl text-espresso/75">{p.intro.text}</p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-dark">{p.intro.cta} <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-outline"><Icon name="phone" size={16} /> Call Us</a>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.1} className="lg:col-span-5">
+        <figure class="relative mx-auto max-w-[32rem]">
+          <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-[1.75rem] border border-gold/70"></span>
+          <img src={p.intro.img} alt={p.intro.imgAlt} class="img-square rounded-[1.75rem] shadow-soft" loading="lazy" />
+        </figure>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Three points -->
+  <section class="section bg-clay text-white">
+    <Watermark class="-right-24 top-0 h-[480px] w-[700px] rotate-[6deg] !opacity-[0.07]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center !text-gold-soft">{p.steps.eyebrow}</p>
+        <h2 class="h2 mt-5 !text-white">{p.steps.title}</h2>
+      </FadeIn>
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        {p.steps.items.map((s, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <article class="group relative h-full overflow-hidden rounded-3xl border border-white/20 p-9 transition-all duration-500 hover:-translate-y-2 hover:border-gold/70 hover:shadow-lift md:p-10">
+              <span aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-terracotta/0 to-terracotta/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+              <span class="font-display text-6xl italic text-gold">{pad(i + 1)}</span>
+              <h3 class="mt-6 font-display text-2xl leading-tight md:text-[1.7rem]">{s.title}</h3>
+              <p class="mt-4 text-white/75">{s.text}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail list with photo -->
+  <section class="section bg-blush">
+    <Watermark class="-right-20 bottom-0 h-[500px] w-[740px] rotate-[-6deg]" />
+    <div class="container-x grid items-start gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-5">
+        <div class="lg:sticky lg:top-40">
+          <p class="eyebrow">{p.detail.eyebrow}</p>
+          <h2 class="h2 mt-5">{p.detail.title}</h2>
+          {p.detail.note && <p class="mt-5 max-w-md text-espresso/75">{p.detail.note}</p>}
+          <figure class="relative mt-10 max-w-[24rem]">
+            <span aria-hidden="true" class="absolute inset-0 -z-10 -translate-x-4 translate-y-4 rounded-[1.75rem] border border-gold/70"></span>
+            <img src={p.detail.img} alt={p.detail.imgAlt} class="img-square rounded-[1.75rem] shadow-soft" loading="lazy" />
+          </figure>
+        </div>
+      </FadeIn>
+      <div class="lg:col-span-7">
+        {p.detail.items.map((d, i) => (
+          <FadeIn client:visible delay={i * 0.05}>
+            <div class:list={["group flex gap-6 border-t border-terracotta/25 py-8 transition-all duration-500 hover:pl-3 md:gap-8", i === p.detail.items.length - 1 && "border-b"]}>
+              <span class="mt-1 font-display text-2xl italic text-terracotta">{pad(i + 1)}</span>
+              <div>
+                <h3 class="font-display text-2xl transition-colors duration-300 group-hover:text-terracotta">{d.title}</h3>
+                <p class="mt-2 max-w-lg text-espresso/75">{d.text}</p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {(p.facts || p.faqs) && (
+    <section class="section bg-ivory">
+      <Watermark class="-left-24 top-0 h-[480px] w-[700px] rotate-[-6deg]" />
+      <div class="container-x">
+        {p.facts && (
+          <div class:list={[p.faqs && "mb-24"]}>
+            <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+              <p class="eyebrow eyebrow-center">{p.facts.eyebrow}</p>
+              <h2 class="h2 mt-5">{p.facts.title}</h2>
+            </FadeIn>
+            <div class="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-2">
+              {p.facts.items.map((f, i) => (
+                <FadeIn client:visible delay={(i % 2) * 0.08}>
+                  <div class="group flex h-full items-start gap-4 rounded-2xl border border-sand bg-white/60 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-terracotta/60 hover:bg-white hover:shadow-soft">
+                    <span class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-terracotta/40 text-terracotta transition-colors duration-500 group-hover:bg-terracotta group-hover:text-white"><Icon name="check" size={16} /></span>
+                    <p class="text-lg leading-snug text-espresso">{f}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        )}
+        {p.faqs && (
+          <div class="mx-auto max-w-3xl">
+            <FadeIn client:visible className="text-center">
+              <p class="eyebrow eyebrow-center">Questions and answers</p>
+              <h2 class="h2 mt-5">Good questions, clear answers</h2>
+            </FadeIn>
+            <div class="mt-12">
+              {p.faqs.map((f, i) => (
+                <FadeIn client:visible delay={i * 0.05}>
+                  <details class="group border-t border-sand py-1 last:border-b">
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-xl text-espresso transition-colors hover:text-terracotta md:text-2xl [&::-webkit-details-marker]:hidden">
+                      {f.q}
+                      <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-terracotta/40 text-terracotta transition-transform duration-300 group-open:rotate-45"><span class="text-2xl leading-none">+</span></span>
+                    </summary>
+                    <p class="max-w-2xl pb-6 text-espresso/75">{f.a}</p>
+                  </details>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Related -->
+  <section class="section bg-white">
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">Related care</p>
+        <h2 class="h2 mt-5">You may also need</h2>
+      </FadeIn>
+      <div class="mt-14 grid gap-8 md:grid-cols-3">
+        {related.map((s, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <article class="group h-full overflow-hidden rounded-[2rem] border border-sand/70 bg-ivory p-4 transition-all duration-500 hover:-translate-y-2 hover:shadow-lift">
+              <div class="group/img relative overflow-hidden rounded-3xl">
+                <img src={s!.img} alt={s!.title} class="img-square transition-transform duration-700 group-hover/img:scale-105" style={`object-position:${s!.pos}`} loading="lazy" />
+                <div class="absolute inset-0 flex items-end bg-gradient-to-t from-espresso/90 via-espresso/60 to-espresso/20 p-6 opacity-0 transition-opacity duration-500 group-hover/img:opacity-100">
+                  <p class="translate-y-3 text-[1.05rem] leading-relaxed text-white transition-transform duration-500 group-hover/img:translate-y-0">{s!.text}</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-4 px-2 pb-1 pt-5">
+                <h3 class="font-display text-2xl leading-tight">{s!.title}</h3>
+                <a href={`/services/${s!.slug}/`} class="btn btn-outline btn-sm shrink-0">Learn More <Icon name="arrow-right" size={16} /></a>
+              </div>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">{p.closing.title}</h2>
+        <p class="mt-5 text-lg text-white/80">{p.closing.text}</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

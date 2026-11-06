@@ -1,0 +1,48 @@
+---
+import FadeIn from "../react/FadeIn";
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { site } from "../../data/site";
+
+const pillars = [
+  { icon: "building", title: "Independent practice", text: "No corporate scripts. Your doctor makes care decisions with you, not for a system." },
+  { icon: "clock", title: "Open 7 days a week", text: "Evening and weekend visits, every day from 9 AM to 8 PM." },
+  { icon: "zap", title: "Same-day appointments", text: "Urgent concern? Call us. We hold space for same-day and emergency visits." },
+  { icon: "shield-check", title: "Insurance made simple", text: "We accept most major plans and confirm your coverage before you come in." },
+];
+---
+<section class="section bg-clay text-white">
+  <Watermark tone="dark" class="left-1/2 top-1/2 h-[720px] w-[1100px] -translate-x-1/2 -translate-y-1/2" />
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgb(185_98_46/0.22),transparent_60%)]"></div>
+
+  <div class="container-x">
+    <FadeIn client:visible className="mx-auto max-w-3xl text-center">
+      <p class="eyebrow eyebrow-center text-gold-soft">Why women choose Aster</p>
+      <h2 class="h2 mt-5">Exceptional Women's Health Care in Manhattan</h2>
+      <p class="mt-6 text-lg text-white/75">
+        Warm, unhurried and clinically excellent. From a first exam to a first heartbeat on screen,
+        you get care that treats you as a whole person.
+      </p>
+    </FadeIn>
+
+    <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {pillars.map((p, i) => (
+        <FadeIn client:visible delay={i * 0.08}>
+          <article class="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-gold/50 hover:bg-white/[0.08] hover:shadow-[0_30px_60px_-25px_rgb(0_0_0/0.7)]">
+            <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-terracotta/30 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"></div>
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-gold/15 text-gold-soft transition-colors duration-300 group-hover:bg-gold group-hover:text-espresso">
+              <Icon name={p.icon} size={26} />
+            </span>
+            <h3 class="mt-6 font-display text-2xl">{p.title}</h3>
+            <p class="mt-3 text-base text-white/70">{p.text}</p>
+          </article>
+        </FadeIn>
+      ))}
+    </div>
+
+    <FadeIn client:visible delay={0.2} className="mt-14 flex flex-wrap items-center justify-center gap-4">
+      <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+      <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> Call {site.phone}</a>
+    </FadeIn>
+  </div>
+</section>

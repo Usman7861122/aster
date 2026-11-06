@@ -1,0 +1,21 @@
+---
+import { icons } from "../../lib/icons";
+interface Props { name: string; class?: string; size?: number; fill?: boolean }
+const { name, class: cls = "", size = 20, fill = false } = Astro.props;
+const paths = icons[name] ?? [];
+---
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={fill ? "currentColor" : "none"}
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={cls}
+  aria-hidden="true"
+>
+  {paths.map((d) => <path d={d} />)}
+</svg>

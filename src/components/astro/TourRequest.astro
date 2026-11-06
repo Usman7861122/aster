@@ -1,0 +1,48 @@
+---
+import QRCode from "qrcode";
+import FadeIn from "../react/FadeIn";
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { site } from "../../data/site";
+
+const qr = await QRCode.toString(site.tourFormUrl, {
+  type: "svg",
+  margin: 1,
+  color: { dark: "#2b1f1b", light: "#ffffff" },
+});
+---
+<section class="section bg-blush">
+  <Watermark class="-right-16 -top-10 h-[460px] w-[680px] rotate-[8deg]" />
+  <div class="container-x grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
+    <FadeIn client:visible>
+      <p class="eyebrow">Labor &amp; Delivery</p>
+      <h2 class="h2 mt-5">See where your baby will arrive</h2>
+      <p class="mt-6 text-espresso/80">
+        Expecting? Tour our Labor &amp; Delivery unit before your due date, meet the space and ask
+        every question you have. Tour requests are accepted on a first-come, first-served basis.
+      </p>
+      <ol class="mt-8 grid gap-3">
+        {["Scan the QR code or open the online form", "Choose the dates that work for you", "We confirm your tour by phone or email"].map((t, i) => (
+          <li class="flex items-center gap-4 rounded-2xl bg-white/70 p-4 transition-all duration-300 hover:bg-white hover:shadow-soft">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-terracotta font-display text-lg text-white">{i + 1}</span>
+            <span class="text-base font-semibold">{t}</span>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href={site.tourFormUrl} target="_blank" rel="noopener" class="btn btn-primary">Request a Tour <Icon name="arrow-up-right" size={18} /></a>
+        <a href={site.phoneHref} class="btn btn-outline"><Icon name="phone" size={16} /> {site.phone}</a>
+      </div>
+    </FadeIn>
+
+    <FadeIn client:visible delay={0.12}>
+      <div class="relative mx-auto grid max-w-lg grid-cols-[1fr_auto] items-end gap-5">
+        <img src="/images/clinic/lounge-mothers.jpg" alt="Mothers and babies relaxing in the Aster lounge" class="img-square shadow-lift" style="object-position:45% 50%" loading="lazy" />
+        <div class="w-36 rounded-3xl bg-white p-3 shadow-lift transition-transform duration-500 hover:-rotate-3 sm:w-44">
+          <div class="aspect-square w-full [&>svg]:h-full [&>svg]:w-full [&>svg]:rounded-xl" set:html={qr} />
+          <p class="mt-2 text-center text-xs font-bold uppercase tracking-widest text-taupe">Scan to request</p>
+        </div>
+      </div>
+    </FadeIn>
+  </div>
+</section>

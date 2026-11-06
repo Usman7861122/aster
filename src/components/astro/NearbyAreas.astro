@@ -1,0 +1,12 @@
+---
+import Icon from "./Icon.astro";
+// Edit this list to match the neighborhoods the practice wants to name.
+const areas = ["the Upper West Side", "Morningside Heights", "Harlem", "Lincoln Square", "the Upper East Side"];
+const list = `${areas.slice(0, -1).join(", ")} and ${areas[areas.length - 1]}`;
+---
+<div class="mt-16 border-t border-white/15 pt-7 md:mt-20">
+  <p class="flex items-start gap-4 text-base font-light leading-relaxed text-white/75 md:text-lg">
+    <Icon name="map-pin" size={22} class="mt-1 shrink-0 text-gold" />
+    <span>Patients are welcome from across {list}, and the greater Manhattan area.</span>
+  </p>
+</div>

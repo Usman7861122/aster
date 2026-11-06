@@ -1,0 +1,10 @@
+---
+// Soft logo flower sitting in the background of a section.
+interface Props { class?: string; tone?: "light" | "dark" }
+const { class: cls = "", tone = "light" } = Astro.props;
+---
+<div
+  aria-hidden="true"
+  class:list={["watermark", tone === "light" ? "opacity-[0.09]" : "opacity-[0.12]", cls]}
+  style="mask-image: radial-gradient(closest-side, #000 55%, transparent 100%); -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);"
+></div>

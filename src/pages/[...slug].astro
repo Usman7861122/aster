@@ -1,0 +1,44 @@
+---
+// Placeholder for every inner page in the menu, so no link leads to a 404.
+// Replace a page by adding its own file, e.g. src/pages/providers.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { mobileNav, serviceMenu, site } from "../data/site";
+import { servicePages } from "../data/service-pages";
+
+export function getStaticPaths() {
+  const built = new Set(["/about-practice/", "/services/fertility/", ...servicePages.map((p) => `/services/${p.slug}/`)]);
+  const pages = new Map<string, string>();
+  for (const n of mobileNav) if (n.href !== "/" && !built.has(n.href)) pages.set(n.href, n.label);
+  for (const g of serviceMenu) for (const s of g.items) if (!built.has(`/services/${s.slug}/`)) pages.set(`/services/${s.slug}/`, s.title);
+  pages.set("/privacy-policy/", "Privacy Policy");
+  pages.set("/terms-and-conditions/", "Terms & Conditions");
+  pages.set("/blog/", "Blog");
+  pages.set("/online-intake/", "Online Intake");
+  return [...pages].map(([href, label]) => ({
+    params: { slug: href.replace(/^\/|\/$/g, "") },
+    props: { label },
+  }));
+}
+
+const { label } = Astro.props;
+---
+
+<BaseLayout title={`${label} | Aster OB/GYN`}>
+  <section class="section bg-ivory pt-48 md:pt-56">
+    <Watermark class="-right-20 top-24 h-[480px] w-[700px] rotate-[8deg]" />
+    <div class="container-x max-w-3xl text-center">
+      <p class="eyebrow eyebrow-center">Aster OB/GYN</p>
+      <h1 class="h2 mt-5">{label}</h1>
+      <p class="mx-auto mt-6 max-w-xl text-espresso/75">
+        This page is being designed. In the meantime, our team is happy to help by phone, every day from 9 AM to 8 PM.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/" class="btn btn-dark">Back to Home <Icon name="arrow-right" size={18} /></a>
+        <a href={site.phoneHref} class="btn btn-outline"><Icon name="phone" size={16} /> {site.phone}</a>
+        <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

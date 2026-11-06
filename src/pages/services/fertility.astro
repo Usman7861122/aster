@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FadeIn from "../../components/react/FadeIn";
+import Icon from "../../components/astro/Icon.astro";
+import Watermark from "../../components/astro/Watermark.astro";
+import NearbyAreas from "../../components/astro/NearbyAreas.astro";
+import { site, services } from "../../data/site";
+
+const pillars = [
+  { n: "01", title: "Comprehensive fertility evaluation", text: "A thorough check to look for possible causes of infertility, so your treatment plan fits you." },
+  { n: "02", title: "Pre-pregnancy counseling and testing", text: "Guidance on your health and lifestyle, plus the tests that help you prepare for a healthy pregnancy." },
+  { n: "03", title: "Genetic testing", text: "Carrier screening and other genetic tests that can show risks for fertility or pregnancy." },
+];
+
+const why = [
+  { title: "Complete evaluation", text: "Detailed fertility checks and treatment advice made for you." },
+  { title: "Personal care", text: "We learn your story first, then build a plan around your goals." },
+  { title: "Expertise and teamwork", text: "We start testing and treatment in our office, and refer you to a top fertility center if you need more advanced care." },
+  { title: "Preconception health", text: "Help to get your body ready, with genetic testing when it makes sense." },
+  { title: "A supportive space", text: "A kind, calm place to talk about the feelings that come with this journey." },
+];
+
+const offer = [
+  "Fertility evaluation and treatment, including fertility medicines when appropriate",
+  "Pre-pregnancy counseling and testing",
+  "Genetic testing and carrier screening",
+  "Testing to understand repeated miscarriages",
+  "Endometrial dating and sonohysterogram",
+  "Fallopian tube check (HSG) using Femview® HSG",
+];
+
+const related = services.filter((s) => ["sono-hsg", "family-planning", "ultrasound"].includes(s.slug));
+---
+<BaseLayout title="Fertility Care in Manhattan | Aster OB/GYN">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
+    <img src="/images/fertility-hero.jpg" alt="A couple holds hands while talking with their doctor about fertility" class="absolute bottom-0 right-0 -z-20 h-[calc(100%-9rem)] w-full object-cover md:h-[calc(100%-9.25rem)] md:w-[72%]" style="object-position: 50% 20%" />
+    <span class="absolute inset-0 -z-10 bg-espresso/65 md:hidden"></span>
+    <span class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso from-[28%] via-espresso/70 via-[48%] to-espresso/10 md:block"></span>
+    <span class="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-espresso/85 to-transparent"></span>
+    <Watermark class="-left-24 -bottom-16 h-[460px] w-[680px] rotate-[-8deg] !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:load className="max-w-2xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/services/" class="hover:text-gold-soft">Services</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">Fertility</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Fertility care</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">Fertility care in Manhattan</h1>
+        <p class="mt-6 max-w-xl text-lg text-white/85 md:text-xl">
+          Personal fertility checks and treatment, with a team that listens and explains every step.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-primary btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+      <NearbyAreas />
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-28 top-4 h-[520px] w-[760px] rotate-[8deg]" />
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-7">
+        <p class="eyebrow">Your journey to parenthood</p>
+        <h2 class="h2 mt-5 max-w-xl">Your journey to parenthood begins here</h2>
+        <p class="mt-8 max-w-2xl text-xl leading-[1.75] text-espresso/90">
+          The path to becoming a parent can bring hope, and it can bring hard days too. We offer
+          personal fertility evaluations and treatment, so you never walk this path alone.
+        </p>
+        <p class="mt-5 max-w-2xl text-espresso/75">
+          Our doctors take time to understand you, your health and your goals. Then we explain your
+          options in plain words and plan the next step together.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-dark">Book a Fertility Visit <Icon name="arrow-right" size={18} /></a>
+          <a href="/services/sono-hsg/" class="btn btn-outline">About Sono HSG</a>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.1} className="lg:col-span-5">
+        <figure class="relative mx-auto max-w-[32rem]">
+          <span aria-hidden="true" class="absolute inset-0 -z-10 translate-x-5 translate-y-5 rounded-[1.75rem] border border-gold/70"></span>
+          <img src="/images/fertility-couple.jpg" alt="A happy couple hugging while looking at a pregnancy test" class="img-square rounded-[1.75rem] shadow-soft" loading="lazy" />
+        </figure>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Three pillars -->
+  <section class="section bg-clay text-white">
+    <Watermark class="-right-24 top-0 h-[480px] w-[700px] rotate-[6deg] !opacity-[0.07]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center !text-gold-soft">Where we begin</p>
+        <h2 class="h2 mt-5 !text-white">Three steps to clear answers</h2>
+      </FadeIn>
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        {pillars.map((p, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <article class="group relative h-full overflow-hidden rounded-3xl border border-white/20 p-9 transition-all duration-500 hover:-translate-y-2 hover:border-gold/70 hover:shadow-lift md:p-10">
+              <span aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-terracotta/0 to-terracotta/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+              <span class="font-display text-6xl italic text-gold">{p.n}</span>
+              <h3 class="mt-6 font-display text-2xl leading-tight md:text-[1.7rem]">{p.title}</h3>
+              <p class="mt-4 text-white/75">{p.text}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Aster -->
+  <section class="section bg-blush">
+    <Watermark class="-right-20 bottom-0 h-[500px] w-[740px] rotate-[-6deg]" />
+    <div class="container-x grid items-start gap-16 lg:grid-cols-12 lg:gap-20">
+      <FadeIn client:visible className="lg:col-span-5">
+        <div class="lg:sticky lg:top-40">
+          <p class="eyebrow">Why Aster OB/GYN</p>
+          <h2 class="h2 mt-5">Why choose us for fertility counseling and treatment</h2>
+          <figure class="relative mt-10 max-w-[24rem]">
+            <span aria-hidden="true" class="absolute inset-0 -z-10 -translate-x-4 translate-y-4 rounded-[1.75rem] border border-gold/70"></span>
+            <img src="/images/fertility-woman.jpg" alt="A smiling young woman resting her hand near her chin" class="img-square rounded-[1.75rem] shadow-soft" loading="lazy" />
+          </figure>
+        </div>
+      </FadeIn>
+      <div class="lg:col-span-7">
+        {why.map((w, i) => (
+          <FadeIn client:visible delay={i * 0.05}>
+            <div class="group flex gap-6 border-t border-terracotta/25 py-8 transition-all duration-500 hover:pl-3 md:gap-8 last:border-b">
+              <span class="mt-1 font-display text-2xl italic text-terracotta">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="font-display text-2xl transition-colors duration-300 group-hover:text-terracotta">{w.title}</h3>
+                <p class="mt-2 max-w-lg text-espresso/75">{w.text}</p>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What we offer -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-24 top-0 h-[480px] w-[700px] rotate-[-6deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">What we offer</p>
+        <h2 class="h2 mt-5">Fertility services, all in one place</h2>
+      </FadeIn>
+      <div class="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-2">
+        {offer.map((o, i) => (
+          <FadeIn client:visible delay={(i % 2) * 0.08}>
+            <div class="group flex h-full items-start gap-4 rounded-2xl border border-sand bg-white/60 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-terracotta/60 hover:bg-white hover:shadow-soft">
+              <span class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-terracotta/40 text-terracotta transition-colors duration-500 group-hover:bg-terracotta group-hover:text-white"><Icon name="check" size={16} /></span>
+              <p class="text-lg leading-snug text-espresso">{o}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+      <FadeIn client:visible className="mx-auto mt-12 max-w-3xl text-center text-espresso/75">
+        <p>We also check and treat sexual health concerns, including STDs, that can affect fertility. If you need more advanced care, we refer you to a trusted fertility center and stay with you along the way.</p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Related services -->
+  <section class="section bg-white">
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">Related care</p>
+        <h2 class="h2 mt-5">You may also need</h2>
+      </FadeIn>
+      <div class="mt-14 grid gap-8 md:grid-cols-3">
+        {related.map((s, i) => (
+          <FadeIn client:visible delay={i * 0.1}>
+            <article class="group h-full overflow-hidden rounded-[2rem] border border-sand/70 bg-ivory p-4 transition-all duration-500 hover:-translate-y-2 hover:shadow-lift">
+              <div class="group/img relative overflow-hidden rounded-3xl">
+                <img src={s.img} alt={s.title} class="img-square transition-transform duration-700 group-hover/img:scale-105" style={`object-position:${s.pos}`} loading="lazy" />
+                <div class="absolute inset-0 flex items-end bg-gradient-to-t from-espresso/90 via-espresso/60 to-espresso/20 p-6 opacity-0 transition-opacity duration-500 group-hover/img:opacity-100">
+                  <p class="translate-y-3 text-[1.05rem] leading-relaxed text-white transition-transform duration-500 group-hover/img:translate-y-0">{s.text}</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-4 px-2 pb-1 pt-5">
+                <h3 class="font-display text-2xl leading-tight">{s.title}</h3>
+                <a href={`/services/${s.slug}/`} class="btn btn-outline btn-sm shrink-0">Learn More <Icon name="arrow-right" size={16} /></a>
+              </div>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Start your fertility journey today</h2>
+        <p class="mt-5 text-lg text-white/80">Expert care, a clear plan, and real hope. Let us help you understand your options.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

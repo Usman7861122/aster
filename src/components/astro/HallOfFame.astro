@@ -1,0 +1,48 @@
+---
+import FadeIn from "../react/FadeIn";
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { oldSite } from "../../lib/media";
+import list from "../../data/old-site-images.json";
+
+const babies = list.babies.map((rel, i) => ({ src: oldSite(rel), n: String(i + 1).padStart(2, "0") }));
+---
+<section id="hall-of-fame" class="section bg-espresso text-white">
+  {/* Gallery-hall lighting */}
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_45%_at_50%_0%,rgb(230_207_159/0.28),transparent_70%)]"></div>
+  <div class="absolute inset-x-0 top-0 -z-10 h-full bg-[repeating-linear-gradient(90deg,transparent_0_119px,rgb(255_255_255/0.025)_119px_120px)]"></div>
+  <Watermark tone="dark" class="left-1/2 top-24 h-[560px] w-[860px] -translate-x-1/2" />
+
+  <div class="container-x">
+    <FadeIn client:visible className="mx-auto max-w-3xl text-center">
+      <svg viewBox="0 0 120 40" class="mx-auto h-10 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M60 6l3 7 7.5.6-5.7 5 1.8 7.4L60 22l-6.6 4 1.8-7.4-5.700-5L57 13z" fill="currentColor" stroke="none"/>
+        <path d="M44 30c-10-2-18-10-20-22 M36 28c-8-1-14-6-17-14 M28 24c-6 0-10-3-13-8"/>
+        <path d="M76 30c10-2 18-10 20-22 M84 28c8-1 14-6 17-14 M92 24c6 0 10-3 13-8"/>
+      </svg>
+      <p class="eyebrow eyebrow-center mt-4 text-gold-soft">Hall of Fame</p>
+      <h2 class="h2 mt-5">Aster OB/GYN Hall of Fame</h2>
+      <p class="mt-5 text-lg text-white/75">Celebrate the beautiful journey of motherhood with us. Every face on this wall started their story with Aster.</p>
+    </FadeIn>
+
+    <div class="mt-20 grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4 md:gap-y-10">
+      {babies.map((b, i) => (
+        <FadeIn client:visible delay={(i % 4) * 0.08} className={i % 2 === 1 ? "md:translate-y-10" : ""}>
+          <figure class="group text-center">
+            {/* Gilded frame */}
+            <div class="relative rounded-[1.6rem] bg-gradient-to-br from-gold-soft via-gold to-[#8f6b34] p-[7px] shadow-[0_25px_50px_-20px_rgb(0_0_0/0.8)] transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_35px_70px_-20px_rgb(201_163_107/0.55)]">
+              <div class="rounded-[1.25rem] bg-ivory p-2.5">
+                <img src={b.src} alt={`Aster baby number ${b.n}`} class="img-square !rounded-2xl transition-transform duration-700 group-hover:scale-[1.04]" loading="lazy" />
+              </div>
+              <div class="pointer-events-none absolute inset-0 rounded-[1.6rem] bg-[radial-gradient(circle_at_30%_0%,rgb(255_255_255/0.35),transparent_55%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            </div>
+          </figure>
+        </FadeIn>
+      ))}
+    </div>
+
+    <FadeIn client:visible className="mt-24 text-center">
+      <a href="/our-babies/" class="btn btn-gold">See More Aster Babies <Icon name="arrow-right" size={18} /></a>
+    </FadeIn>
+  </div>
+</section>

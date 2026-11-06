@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/react/Hero";
+import About from "../components/astro/About.astro";
+import ExceptionalCare from "../components/astro/ExceptionalCare.astro";
+import Services from "../components/astro/Services.astro";
+import Providers from "../components/astro/Providers.astro";
+import Achievements from "../components/astro/Achievements.astro";
+import HallOfFame from "../components/astro/HallOfFame.astro";
+import TourRequest from "../components/astro/TourRequest.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import FadeIn from "../components/react/FadeIn";
+import Icon from "../components/astro/Icon.astro";
+import Testimonials from "../components/react/Testimonials";
+import CardFanCarousel from "@/components/ui/card-fan-carousel";
+import ContactSection from "../components/react/ContactSection";
+import { testimonials, gallery } from "../data/site";
+---
+
+<BaseLayout title="Aster OB/GYN | Women's Health Care on the Upper West Side, Manhattan">
+  <Hero client:load />
+  <About />
+  <ExceptionalCare />
+  <Services />
+  <Providers />
+  <Achievements />
+  <HallOfFame />
+  <TourRequest />
+
+  <section id="reviews" class="section bg-ivory">
+    <Watermark class="-left-20 top-0 h-[480px] w-[700px] rotate-[-8deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto mb-14 max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">Testimonials</p>
+        <h2 class="h2 mt-5">Kind words from our patients</h2>
+      </FadeIn>
+
+      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <FadeIn client:visible className="lg:col-span-5">
+          <figure class="relative mx-auto max-w-[30rem] lg:mx-0">
+            <span aria-hidden="true" class="absolute inset-0 -z-10 -translate-x-4 translate-y-4 rounded-[1.75rem] border border-gold/70"></span>
+            <img src="/images/happy-mother.jpg" alt="A smiling mother holding her newborn baby" class="img-square rounded-[1.75rem] shadow-soft" loading="lazy" />
+            <figcaption class="absolute -bottom-5 right-4 flex items-center gap-3 rounded-2xl border border-sand/70 bg-white px-5 py-3 shadow-lift">
+              <span class="flex gap-0.5 text-gold" aria-hidden="true"><Icon name="star" size={16} fill /><Icon name="star" size={16} fill /><Icon name="star" size={16} fill /><Icon name="star" size={16} fill /><Icon name="star" size={16} fill /></span>
+              <span class="font-display text-base text-espresso">Happy families</span>
+            </figcaption>
+          </figure>
+        </FadeIn>
+
+        <div class="lg:col-span-7">
+          <Testimonials client:visible items={testimonials} />
+        </div>
+      </div>
+
+      <FadeIn client:visible className="mt-16 text-center">
+        <a href="/testimonials/" class="btn btn-outline">Read More Reviews <Icon name="arrow-right" size={18} /></a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section id="gallery" class="section bg-blush">
+    <Watermark class="-right-24 bottom-0 h-[480px] w-[700px] rotate-[6deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto mb-16 max-w-2xl text-center">
+        <p class="eyebrow eyebrow-center">Gallery</p>
+        <h2 class="h2 mt-5">A look inside Aster</h2>
+        <p class="mt-5 text-espresso/75">Calm rooms, familiar faces and a lot of happy families.</p>
+      </FadeIn>
+      <div class="overflow-x-clip pb-4">
+        <CardFanCarousel client:visible cards={gallery.map((g) => ({ imgUrl: g.src, alt: g.alt }))} />
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section bg-ivory !pb-24 md:!pb-32">
+    <div class="container-x">
+      <ContactSection client:visible />
+    </div>
+  </section>
+</BaseLayout>

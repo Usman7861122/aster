@@ -1,0 +1,52 @@
+---
+import Icon from "./Icon.astro";
+import Watermark from "./Watermark.astro";
+import { site } from "../../data/site";
+
+const year = new Date().getFullYear();
+const groups = [
+  { title: "Practice", links: [["About Practice", "/about-practice/"], ["Providers", "/providers/"], ["Our Babies", "/our-babies/"], ["Testimonials", "/testimonials/"], ["Careers", "/careers/"]] },
+  { title: "Patients", links: [["Our Services", "/services/"], ["Insurance", "/insurance/"], ["Contact Us", "/contact/"], ["Online Intake", "/online-intake/"], ["Patient Portal", site.portalUrl], ["Blog", "/blog/"]] },
+];
+---
+<footer class="relative isolate overflow-hidden bg-espresso text-white">
+  <Watermark tone="dark" class="-right-24 -top-10 h-[520px] w-[760px] rotate-[8deg]" />
+  <div class="container-x grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <div>
+      <img src="/images/logo.png" alt="Aster OB/GYN" class="h-24 w-24 rounded-full bg-white shadow-lg" loading="lazy" />
+      <p class="mt-6 max-w-xs text-base text-white/70">
+        Independent, compassionate women's health care on Manhattan's Upper West Side.
+      </p>
+    </div>
+
+    {groups.map((g) => (
+      <nav aria-label={g.title}>
+        <h3 class="font-display text-xl text-gold-soft">{g.title}</h3>
+        <ul class="mt-4 grid gap-2.5 text-base">
+          {g.links.map(([label, href]) => (
+            <li><a href={href} class="text-white/75 underline-offset-4 transition-colors hover:text-white hover:underline">{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    ))}
+
+    <div>
+      <h3 class="font-display text-xl text-gold-soft">Visit us</h3>
+      <ul class="mt-4 grid gap-3 text-base text-white/80">
+        <li class="flex items-start gap-3"><Icon name="map-pin" size={18} class="mt-1 shrink-0 text-gold" /><span>{site.address[0]}<br />{site.address[1]}</span></li>
+        <li class="flex items-center gap-3"><Icon name="phone" size={18} class="shrink-0 text-gold" /><a href={site.phoneHref} class="underline-offset-4 hover:underline">{site.phone}</a></li>
+        <li class="flex items-center gap-3"><Icon name="clock" size={18} class="shrink-0 text-gold" />{site.hours}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-3 py-6 text-sm text-white/60 md:flex-row">
+      <p>© {year} Aster OB/GYN. All rights reserved.</p>
+      <p class="flex gap-6">
+        <a href="/privacy-policy/" class="underline-offset-4 hover:text-white hover:underline">Privacy Policy</a>
+        <a href="/terms-and-conditions/" class="underline-offset-4 hover:text-white hover:underline">Terms &amp; Conditions</a>
+      </p>
+    </div>
+  </div>
+</footer>
