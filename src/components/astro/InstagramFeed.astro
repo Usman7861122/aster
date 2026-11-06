@@ -1,17 +1,18 @@
 ---
-// Static Instagram showcase. Tiles use clinic photos for now; link them to real posts later
-// by replacing `href` in each tile (or swap this section for a live feed).
+// Static Instagram showcase of real @asterobgyn posts (images saved locally, each tile links to its post).
 import FadeIn from "../react/FadeIn";
 import Icon from "./Icon.astro";
 import { site } from "../../data/site";
 
+const base = "https://www.instagram.com/asterobgyn";
+// Latest posts from @asterobgyn. To refresh, replace the image in /public/images/instagram and the link id.
 const posts = [
-  { img: "/images/clinic/hallway-mother-baby.jpg", pos: "45% 50%", alt: "A mother carries her baby down the Aster hallway", caption: "Little visitors, big smiles" },
-  { img: "/images/clinic/ultrasound-consult.jpg", pos: "45% 50%", alt: "Dr. Fahmy talks with a patient beside the ultrasound", caption: "Time to talk, every visit" },
-  { img: "/images/clinic/lounge-2.jpg", pos: "45% 50%", alt: "Doctors greet mothers and babies in the Aster lounge", caption: "Our lounge, full of friends" },
-  { img: "/images/clinic/exam-baby.jpg", pos: "50% 40%", alt: "Dr. Roesner with a mother and baby in the exam room", caption: "Meeting a new baby" },
-  { img: "/images/clinic/lounge.jpg", pos: "35% 50%", alt: "The Aster waiting lounge with art on the wall", caption: "A calm place to wait" },
-  { img: "/images/clinic/lounge-3.jpg", pos: "50% 50%", alt: "A doctor greets a baby in the Aster lounge", caption: "Hello, little one" },
+  { img: "/images/instagram/post-1.jpg", href: `${base}/p/DfGXV0nuO8p/`, alt: "Instagram post: HPV is extremely common", caption: "HPV is extremely common" },
+  { img: "/images/instagram/post-2.jpg", href: `${base}/reel/DfUeG5bBADT/`, alt: "Instagram reel: the pelvic floor, the muscles you don't think about", caption: "The pelvic floor" },
+  { img: "/images/instagram/post-3.jpg", href: `${base}/p/DfKK8WzjuI_/`, alt: "Instagram post: what is a Pap smear actually looking for?", caption: "What a Pap smear looks for" },
+  { img: "/images/instagram/post-4.jpg", href: `${base}/p/DfGV8HYumKm/`, alt: "Instagram post: the HPV vaccine isn't just for kids", caption: "The HPV vaccine isn't just for kids" },
+  { img: "/images/instagram/post-5.jpg", href: `${base}/reel/DerJ4v0BATq/`, alt: "Instagram reel: why do I pee when I laugh?", caption: "Why do I pee when I laugh?" },
+  { img: "/images/instagram/post-6.jpg", href: `${base}/p/DepdPJjBN_5/`, alt: "Instagram reel about fibroids", caption: "Fibroids" },
 ];
 ---
 <section id="instagram" class="section bg-white">
@@ -19,7 +20,7 @@ const posts = [
     <FadeIn client:visible className="mx-auto max-w-2xl text-center">
       <p class="eyebrow eyebrow-center">Follow along</p>
       <h2 class="h2 mt-5">Life at Aster, on Instagram</h2>
-      <p class="mt-5 text-espresso/75">Happy families, helpful tips and a peek behind the scenes.</p>
+      <p class="mt-5 text-espresso/75">Helpful tips and honest answers on women's health, from our team.</p>
       <a href={site.instagram} target="_blank" rel="noopener" class="btn btn-primary btn-glow mt-8">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" /></svg>
         Follow {site.instagramHandle}
@@ -30,13 +31,13 @@ const posts = [
       {posts.map((p, i) => (
         <FadeIn client:visible delay={i * 0.07}>
           <a
-            href={site.instagram}
+            href={p.href}
             target="_blank"
             rel="noopener"
             aria-label={`${p.alt} - view on Instagram`}
-            class="group/ig relative block overflow-hidden rounded-3xl shadow-soft transition-all duration-500 hover:-translate-y-2 hover:shadow-lift"
+            class="group/ig relative block overflow-hidden rounded-3xl ring-1 ring-sand/80 shadow-soft transition-all duration-500 hover:-translate-y-2 hover:shadow-lift"
           >
-            <img src={p.img} alt={p.alt} class="img-square transition-transform duration-700 group-hover/ig:scale-110" style={`object-position:${p.pos}`} loading="lazy" />
+            <img src={p.img} alt={p.alt} class="img-square transition-transform duration-700 group-hover/ig:scale-110" loading="lazy" />
             <span class="absolute inset-0 flex flex-col items-center justify-end gap-2 bg-gradient-to-t from-espresso/85 via-espresso/30 to-transparent p-3 text-center text-white opacity-0 transition-opacity duration-500 group-hover/ig:opacity-100">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" /></svg>
               <span class="text-sm leading-snug">{p.caption}</span>
