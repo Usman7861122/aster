@@ -9,7 +9,7 @@ const BASE = "https://asterobgyn.com/wp-content/uploads/";
 const OUT = path.resolve("public/images/old-site");
 await mkdir(OUT, { recursive: true });
 
-const files = [...list.babies, list.acrSeal, list.certificate];
+const files = [...new Set([...list.babies, ...list.ourBabies]), list.acrSeal, list.certificate];
 for (const rel of files) {
   const name = path.basename(rel);
   const dest = path.join(OUT, name);

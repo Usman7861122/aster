@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/react/FadeIn";
+import Gallery from "../components/react/Gallery";
+import Icon from "../components/astro/Icon.astro";
+import Watermark from "../components/astro/Watermark.astro";
+import { site } from "../data/site";
+import { oldSite } from "../lib/media";
+import list from "../data/old-site-images.json";
+
+const pos = ["50% 40%", "50% 35%", "50% 45%", "50% 30%"];
+const images = list.ourBabies.map((rel, i) => ({
+  src: oldSite(rel),
+  alt: "A baby welcomed by the Aster family",
+  pos: pos[i % pos.length],
+}));
+---
+<BaseLayout title="Our Babies | Aster OB/GYN on the Upper West Side">
+  <!-- Title band -->
+  <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-28">
+    <span class="absolute inset-0 -z-10 bg-gradient-to-br from-espresso via-espresso to-terracotta-deep/60"></span>
+    <Watermark class="-right-24 -bottom-16 h-[460px] w-[680px] rotate-[8deg] !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:load className="max-w-3xl">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/70">
+          <a href="/" class="hover:text-gold-soft">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">Our Babies</span>
+        </nav>
+        <p class="eyebrow mt-8 !text-gold-soft">Aster OB/GYN</p>
+        <h1 class="mt-5 font-display text-5xl leading-[1.08] md:text-7xl">Our babies</h1>
+        <p class="mt-6 max-w-2xl text-lg text-white/85 md:text-xl">
+          We are honored to be part of life's most meaningful moments.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section bg-ivory">
+    <Watermark class="-left-24 top-10 h-[420px] w-[620px] rotate-[-8deg]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-3xl text-center">
+        <p class="eyebrow eyebrow-center">Hall of Fame</p>
+        <h2 class="h2 mt-5">Every baby has a story</h2>
+        <p class="mt-6 text-lg text-espresso/75">
+          Helping a family welcome a new baby is the best part of our work. Here are some of the little ones we have had the joy of meeting, and the families who trusted us along the way.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Photo wall -->
+  <section class="section bg-blush">
+    <Watermark class="-right-24 bottom-0 h-[460px] w-[680px] rotate-[8deg]" />
+    <div class="container-x">
+      <Gallery client:visible images={images} />
+      <p class="mt-10 text-center text-sm text-espresso/60">Tap a photo to see it larger.</p>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="relative isolate overflow-hidden bg-gradient-to-br from-terracotta-deep to-espresso py-24 text-center text-white">
+    <Watermark class="left-1/2 top-1/2 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 !opacity-[0.1]" />
+    <div class="container-x">
+      <FadeIn client:visible className="mx-auto max-w-2xl">
+        <h2 class="font-display text-4xl leading-tight md:text-5xl">Your health. Your journey. Our priority.</h2>
+        <p class="mt-5 text-lg text-white/80">Planning your family? We would love to meet you.</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href={site.bookingUrl} target="_blank" rel="noopener" class="btn btn-gold btn-glow">Book Appointment <Icon name="arrow-right" size={18} /></a>
+          <a href={site.phoneHref} class="btn btn-light"><Icon name="phone" size={16} /> {site.phone}</a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</BaseLayout>

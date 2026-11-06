@@ -8,7 +8,7 @@ import { mobileNav, serviceMenu, site } from "../data/site";
 import { servicePages } from "../data/service-pages";
 
 export function getStaticPaths() {
-  const built = new Set(["/about-practice/", "/services/fertility/", ...servicePages.map((p) => `/services/${p.slug}/`)]);
+  const built = new Set(["/about-practice/", "/our-babies/", "/services/fertility/", ...servicePages.map((p) => `/services/${p.slug}/`)]);
   const pages = new Map<string, string>();
   for (const n of mobileNav) if (n.href !== "/" && !built.has(n.href)) pages.set(n.href, n.label);
   for (const g of serviceMenu) for (const s of g.items) if (!built.has(`/services/${s.slug}/`)) pages.set(`/services/${s.slug}/`, s.title);
