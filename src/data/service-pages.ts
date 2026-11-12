@@ -8,6 +8,7 @@ export interface ServicePage {
   eyebrow: string;
   lede: string;
   heroAlt: string;
+  heroImg?: string;       // optional: use a different hero file than /images/<slug>-hero.jpg
   heroPos?: string;
   intro: { eyebrow: string; title: string; lead: string; text: string; cta: string; img: string; imgAlt: string };
   steps: { eyebrow: string; title: string; items: { title: string; text: string }[] };
@@ -18,7 +19,7 @@ export interface ServicePage {
   closing: { title: string; text: string };
 }
 
-export const servicePages: ServicePage[] = [
+const basePages: ServicePage[] = [
   {
     slug: "sono-hsg",
     title: "Sono HSG in Manhattan",
@@ -734,3 +735,6 @@ export const servicePages: ServicePage[] = [
     closing: { title: "A private conversation is the first step", text: "Book a consultation and ask us anything." },
   },
 ];
+
+import { morePages } from "./service-pages-more";
+export const servicePages: ServicePage[] = [...basePages, ...morePages];

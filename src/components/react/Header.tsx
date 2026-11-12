@@ -201,7 +201,7 @@ export default function Header({ solid: forceSolid = false }: Props) {
                 exit={{ opacity: 0, y: -6 }}
                 onMouseEnter={() => clearTimeout(timer.current)}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute left-1/2 top-full z-10 hidden w-[min(74rem,calc(100vw-3rem))] -translate-x-1/2 pt-3 xl:block"
+                className="absolute left-1/2 top-full z-10 hidden w-[min(80rem,calc(100vw-3rem))] -translate-x-1/2 pt-3 xl:block"
               >
                 <MegaMenu />
               </motion.div>

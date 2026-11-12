@@ -52,12 +52,14 @@ export const serviceMenu: { title: string; items: ServiceLink[] }[] = [
       { title: "Sono HSG", slug: "sono-hsg", note: "Uterus and tubes imaging" },
       { title: "Family Planning", slug: "family-planning", note: "Guidance for every plan" },
       { title: "Contraception", slug: "contraception", note: "Birth control options" },
+      { title: "IUD Insertion & Removal", slug: "iud-insertion-removal", note: "Long-lasting birth control" },
     ],
   },
   {
     title: "Pregnancy",
     items: [
       { title: "Obstetrician", slug: "obstetrician", note: "Care through pregnancy" },
+      { title: "Labor and Delivery", slug: "labor-and-delivery", note: "Care through birth" },
       { title: "Ultrasound", slug: "ultrasound", note: "Including 3D imaging" },
     ],
   },
@@ -66,6 +68,8 @@ export const serviceMenu: { title: string; items: ServiceLink[] }[] = [
     items: [
       { title: "Gynecology", slug: "gynecology", note: "Routine and diagnostic care" },
       { title: "Annual OB/GYN Exams", slug: "annual-exams", note: "Yearly women's health exams" },
+      { title: "Pelvic Exam", slug: "pelvic-exam", note: "Routine pelvic check" },
+      { title: "Pap Smear", slug: "pap-smear", note: "Cervical screening" },
       { title: "Colposcopy", slug: "colposcopy", note: "After an abnormal Pap smear" },
       { title: "LEEP", slug: "leep", note: "In-office cervical care" },
       { title: "STD Testing", slug: "std-testing", note: "Screening and results" },
@@ -73,12 +77,45 @@ export const serviceMenu: { title: string; items: ServiceLink[] }[] = [
     ],
   },
   {
+    title: "Procedures",
+    items: [
+      { title: "Endometrial Biopsy", slug: "endometrial-biopsy", note: "Uterine lining test" },
+      { title: "Hysteroscopy", slug: "hysteroscopy", note: "A look inside the uterus" },
+      { title: "Dilation & Curettage", slug: "dilation-and-curettage", note: "D&C" },
+      { title: "Uterine Polyp Removal", slug: "uterine-polyp-removal", note: "Ease unusual bleeding" },
+      { title: "Bartholin's Cyst Treatment", slug: "bartholins-cyst-treatment", note: "Cyst and abscess care" },
+    ],
+  },
+  {
+    title: "Cosmetic",
+    items: [
+      { title: "Cosmetic Gynecology", slug: "cosmetic-gynecology", note: "Comfort and confidence" },
+      { title: "Labiaplasty", slug: "labiaplasty", note: "Comfort-focused procedure" },
+      { title: "Vaginoplasty", slug: "vaginoplasty", note: "Repair and tightening" },
+    ],
+  },
+  {
     title: "Surgery",
     items: [
+      { title: "Gynecologic Surgery", slug: "gynecologic-surgery-overview", note: "Overview" },
+      { title: "Hysterectomy", slug: "hysterectomy", note: "Uterus removal" },
       { title: "Fibroids", slug: "fibroids", note: "Minimally invasive treatment" },
+      { title: "Myomectomy", slug: "myomectomy", note: "Remove fibroids, keep the uterus" },
+      { title: "Endometriosis Excision", slug: "endometriosis-excision", note: "Ease pelvic pain" },
+      { title: "Pelvic Adhesion Removal", slug: "pelvic-adhesion-removal", note: "Scar tissue removal" },
+      { title: "Ovarian Cystectomy", slug: "ovarian-cystectomy", note: "Cyst removal" },
       { title: "Laparoscopy", slug: "laparoscopy", note: "Small-incision surgery" },
       { title: "Minimally Invasive Surgery", slug: "minimally-invasive-surgery", note: "Smaller incisions" },
-      { title: "Labiaplasty", slug: "labiaplasty", note: "Comfort-focused procedure" },
+    ],
+  },
+  {
+    title: "Ovaries & Tubes",
+    items: [
+      { title: "Oophorectomy", slug: "oophorectomy", note: "Ovary removal" },
+      { title: "Salpingo-Oophorectomy", slug: "salpingo-oophorectomy", note: "Ovary and tube removal" },
+      { title: "Bilateral Salpingectomy", slug: "bilateral-salpingectomy", note: "Both tubes removed" },
+      { title: "Tuboplasty", slug: "tuboplasty", note: "Tube repair" },
+      { title: "Tubal Ligation", slug: "tubal-ligation", note: "Permanent birth control" },
     ],
   },
 ];

@@ -13,14 +13,11 @@ function Group({ group }: { group: (typeof serviceMenu)[number] }) {
           <li key={it.slug}>
             <a
               href={`/services/${it.slug}/`}
-              className="group/item relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 hover:bg-terracotta/[0.08] hover:pl-4"
+              className="group/item relative flex items-center gap-3 rounded-xl px-3 py-2 transition-all duration-300 hover:bg-terracotta/[0.08] hover:pl-4"
             >
               <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold transition-all duration-300 group-hover/item:scale-150 group-hover/item:bg-terracotta" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-[15px] font-semibold leading-tight text-espresso transition-colors group-hover/item:text-terracotta">
-                  {it.title}
-                </span>
-                <span className="mt-0.5 block truncate text-[12.5px] text-taupe">{it.note}</span>
+              <span className="min-w-0 flex-1 text-[14.5px] font-semibold leading-tight text-espresso transition-colors group-hover/item:text-terracotta">
+                {it.title}
               </span>
               <Icon
                 name="arrow-right"
@@ -36,7 +33,7 @@ function Group({ group }: { group: (typeof serviceMenu)[number] }) {
 }
 
 export default function MegaMenu() {
-  const [fertility, pregnancy, gyn, surgery] = serviceMenu;
+  const [fertility, pregnancy, gyn, procedures, cosmetic, surgery, tubes] = serviceMenu;
 
   return (
     <div className="relative isolate overflow-hidden rounded-[2rem] border border-gold/40 bg-ivory p-5 shadow-[0_45px_100px_-30px_rgb(43_31_27/0.65)] md:p-7">
@@ -82,13 +79,18 @@ export default function MegaMenu() {
         </div>
 
         {/* Columns */}
-        <div className="grid grid-cols-3 gap-x-3">
+        <div className="grid grid-cols-4 gap-x-2">
           <div className="grid content-start gap-4">
             <Group group={fertility} />
             <Group group={pregnancy} />
+            <Group group={cosmetic} />
           </div>
           <div className="content-start">
             <Group group={gyn} />
+          </div>
+          <div className="grid content-start gap-4">
+            <Group group={procedures} />
+            <Group group={tubes} />
           </div>
           <div className="grid content-start gap-4">
             <Group group={surgery} />

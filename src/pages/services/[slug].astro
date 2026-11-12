@@ -18,7 +18,7 @@ const related = p.related
   .map((s) => {
     const built = builtPages.get(s);
     const menu = menuItems.find((x) => x.slug === s);
-    if (built && menu) return { slug: s, title: menu.title, img: `/images/${s}-a.jpg`, pos: "50% 50%", text: built.lede };
+    if (built && menu) return { slug: s, title: menu.title, img: built.intro.img, pos: "50% 50%", text: built.lede };
     return services.find((x) => x.slug === s);
   })
   .filter(Boolean);
@@ -27,7 +27,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 <BaseLayout title={p.metaTitle}>
   <!-- Title band -->
   <section class="relative isolate overflow-hidden bg-espresso pt-44 pb-24 text-white md:pt-56 md:pb-32">
-    <img src={`/images/${p.slug}-hero.jpg`} alt={p.heroAlt} class="absolute bottom-0 right-0 -z-20 h-[calc(100%-9rem)] w-full object-cover md:h-[calc(100%-9.25rem)] md:w-[72%]" style={`object-position: ${p.heroPos ?? "50% 20%"}`} />
+    <img src={p.heroImg ?? `/images/${p.slug}-hero.jpg`} alt={p.heroAlt} class="absolute bottom-0 right-0 -z-20 h-[calc(100%-9rem)] w-full object-cover md:h-[calc(100%-9.25rem)] md:w-[72%]" style={`object-position: ${p.heroPos ?? "50% 20%"}`} />
     <span class="absolute inset-0 -z-10 bg-espresso/65 md:hidden"></span>
     <span class="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso from-[28%] via-espresso/70 via-[48%] to-espresso/10 md:block"></span>
     <span class="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-espresso/85 to-transparent"></span>
